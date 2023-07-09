@@ -35,8 +35,8 @@ export default MyPage({ queries }: Props) {
 
 ```typescript
 import {
-	type SimpleEntryPoint,
-	JSResource,
+  type SimpleEntryPoint,
+  JSResource,
 } from "@kejistan/react-router-relay";
 import nullthrows from "nullthrows";
 
@@ -44,19 +44,19 @@ import type MyPage from "./MyPage";
 import MyPageQuery from "./__generated__/MyPageQuery.graphql";
 
 const entryPoint: SimpleEntryPoint<typeof MyPage> = {
-	root: JSResource("MyPage", () => import("./MyPage")),
-	getPreloadedProps({ params }) {
-		return {
-			queries: {
-				query: {
-					parameters: MyPageQuery,
-					variables: {
-						someId: nullthrows(params.someId),
-					},
-				},
-			},
-		};
-	},
+  root: JSResource("MyPage", () => import("./MyPage")),
+  getPreloadedProps({ params }) {
+    return {
+      queries: {
+        query: {
+          parameters: MyPageQuery,
+          variables: {
+            someId: nullthrows(params.someId),
+          },
+        },
+      },
+    };
+  },
 };
 
 export default entryPoint;
@@ -71,36 +71,36 @@ import { useMemo, useRef } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { useRelayEnvironment } from "react-relay";
 import {
-	type EntryPointRouteObject,
-	preparePreloadableRoutes,
+  type EntryPointRouteObject,
+  preparePreloadableRoutes,
 } from "@kejistan/react-router-relay";
 
 import MyPageEntryPoint from "./MyPage.entrypoint";
 
 const MY_ROUTES: EntryPointRouteObject[] = [
-	{
-		path: ":someId",
-		entryPoint: MyPageEntryPoint,
-	},
+  {
+    path: ":someId",
+    entryPoint: MyPageEntryPoint,
+  },
 ];
 
 export default function MyRouter() {
-	const environment = useRelayEnvironment();
-	// Potentially unnecessary if you never change your environment
-	const environmentRef = useRef(environment);
-	environmentRef.current = environment;
+  const environment = useRelayEnvironment();
+  // Potentially unnecessary if you never change your environment
+  const environmentRef = useRef(environment);
+  environmentRef.current = environment;
 
-	const router = useMemo(() => {
-		const routes = preparePreloadableRoutes(MY_ROUTES, {
-			getEnvironment() {
-				return environmentRef.current;
-			},
-		});
+  const router = useMemo(() => {
+    const routes = preparePreloadableRoutes(MY_ROUTES, {
+      getEnvironment() {
+        return environmentRef.current;
+      },
+    });
 
-		return createBrowserRouter(routes);
-	}, []);
+    return createBrowserRouter(routes);
+  }, []);
 
-	return <RouterProvider router={router} />;
+  return <RouterProvider router={router} />;
 }
 ```
 
