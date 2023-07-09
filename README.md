@@ -104,6 +104,10 @@ export default function MyRouter() {
 }
 ```
 
-## JSResource
+## Link
+
+This package includes a wrapper around `react-router-dom`'s `Link` component. Using this component is optional. This adds a basic pre-fetch to the link that will load the JSResources for the destination on hover or focus events.
+
+## A note on JSResource
 
 Loading data for entrypoints depends on having a JSResource implementation to coordinate and cache loads of the same resource. This package does not depend on using the internal JSResource implementation if you wish to use a different one in your entrypoints.
