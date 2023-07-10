@@ -1,40 +1,40 @@
 {
-	"name": "@loop-payments/react-router-relay",
-	"version": "0.0.1",
-	"description": "Relay integration for react-router",
-	"main": "dist/index.js",
-	"files": [
-		"dist"
-	],
-	"types": "./dist/index.d.ts",
-	"scripts": {
-		"build": "tsc -p build.tsconfig.json"
-	},
-	"author": "engineering@loop.com",
-	"license": "MIT",
-	"devDependencies": {
-		"@types/react-relay": "^14.1.4",
-		"prettier": "^3.0.0",
-		"react": "^18.2.0",
-		"react-relay": "^15.0.0",
-		"react-router-dom": "^6.14.1",
-		"typescript": "^5.1.6"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/loop-payments/react-router-relay.git"
-	},
-	"keywords": [
-		"graphql",
-		"relay",
-		"react-router"
-	],
-	"bugs": {
-		"url": "https://github.com/loop-payments/react-router-relay/issues"
-	},
-	"homepage": "https://github.com/loop-payments/react-router-relay#readme",
-	"peerDependencies": {
-		"react-relay": ">=15.0.0",
-		"react-router-dom": ">=6.4.0"
-	}
+  "name": "@loop-payments/react-router-relay",
+  "version": "0.0.1",
+  "description": "Relay integration for react-router",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p build.tsconfig.json"
+  },
+  "author": "engineering@loop.com",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/react-relay": "^14.1.4",
+    "prettier": "^3.0.0",
+    "react": "^18.2.0",
+    "react-relay": "^15.0.0",
+    "react-router-dom": "^6.14.1",
+    "typescript": "^5.1.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/loop-payments/react-router-relay.git"
+  },
+  "keywords": [
+    "graphql",
+    "relay",
+    "react-router"
+  ],
+  "bugs": {
+    "url": "https://github.com/loop-payments/react-router-relay/issues"
+  },
+  "homepage": "https://github.com/loop-payments/react-router-relay#readme",
+  "peerDependencies": {
+    "react-relay": ">=15.0.0",
+    "react-router-dom": ">=6.4.0"
+  }
 }
