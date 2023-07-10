@@ -1,9 +1,9 @@
 import { useContext, useCallback } from "react";
 import {
-	type To,
-	UNSAFE_DataRouterContext,
-	matchRoutes,
-	useResolvedPath,
+  type To,
+  UNSAFE_DataRouterContext,
+  matchRoutes,
+  useResolvedPath,
 } from "react-router-dom";
 
 /**
@@ -12,39 +12,39 @@ import {
  * can use this to build your own Link component if necessary.
  */
 export function useLinkDataLoadHandler(to: To): () => void {
-	const routes = useContext(UNSAFE_DataRouterContext)?.router.routes ?? [];
+  const routes = useContext(UNSAFE_DataRouterContext)?.router.routes ?? [];
 
-	// Trigger data fetching for any entrypoints
-	const resolvedPath = useResolvedPath(to);
-	const fetchData = useCallback(() => {
-		const matches = matchRoutes([...routes], to);
-		if (!matches) {
-			return;
-		}
+  // Trigger data fetching for any entrypoints
+  const resolvedPath = useResolvedPath(to);
+  const fetchData = useCallback(() => {
+    const matches = matchRoutes([...routes], to);
+    if (!matches) {
+      return;
+    }
 
-		const url = new URL(
-			resolvedPath.pathname + resolvedPath.search,
-			window.location.origin
-		);
-		const request = new Request(url);
-		for (const match of matches) {
-			const { loader } = match.route;
+    const url = new URL(
+      resolvedPath.pathname + resolvedPath.search,
+      window.location.origin
+    );
+    const request = new Request(url);
+    for (const match of matches) {
+      const { loader } = match.route;
 
-			try {
-				loader?.({
-					params: match.params,
-					request,
-				});
-			} catch (e: unknown) {
-				console.warn(
-					`[react-router-relay] failed to preload ${
-						match.pathname
-					} data for route ${JSON.stringify(to)}`,
-					e
-				);
-			}
-		}
-	}, [routes, to, resolvedPath]);
+      try {
+        loader?.({
+          params: match.params,
+          request,
+        });
+      } catch (e: unknown) {
+        console.warn(
+          `[react-router-relay] failed to preload ${
+            match.pathname
+          } data for route ${JSON.stringify(to)}`,
+          e
+        );
+      }
+    }
+  }, [routes, to, resolvedPath]);
 
-	return fetchData;
+  return fetchData;
 }

@@ -22,79 +22,79 @@ type Loader<TModule> = () => Promise<TModule | { readonly default: TModule }>;
  * argument - it allows accessing the state of the resource.
  */
 class Resource<TModule> implements JSResourceReference<TModule> {
-	#error: Error | null = null;
-	#promise: Promise<TModule> | null = null;
-	#result: TModule | null = null;
-	#moduleId: string;
-	#loader: Loader<TModule>;
+  #error: Error | null = null;
+  #promise: Promise<TModule> | null = null;
+  #result: TModule | null = null;
+  #moduleId: string;
+  #loader: Loader<TModule>;
 
-	constructor(moduleId: string, loader: Loader<TModule>) {
-		this.#moduleId = moduleId;
-		this.#loader = loader;
-	}
+  constructor(moduleId: string, loader: Loader<TModule>) {
+    this.#moduleId = moduleId;
+    this.#loader = loader;
+  }
 
-	/**
-	 * Loads the resource if necessary.
-	 */
-	load(): Promise<TModule> {
-		let promise = this.#promise;
-		if (promise == null) {
-			promise = this.#loader()
-				.then((result) => {
-					// This is a hack to support both modules with default exports (the
-					// common case) and loaders that need to export something directly.
-					// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-					// @ts-ignore
-					if (result.default) {
-						// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-						// @ts-ignore
-						this.#result = result.default as TModule;
-					} else {
-						this.#result = result as TModule;
-					}
-					return this.#result;
-				})
-				.catch((error) => {
-					this.#error = error;
-					throw error;
-				});
-			this.#promise = promise;
-		}
-		return promise;
-	}
+  /**
+   * Loads the resource if necessary.
+   */
+  load(): Promise<TModule> {
+    let promise = this.#promise;
+    if (promise == null) {
+      promise = this.#loader()
+        .then((result) => {
+          // This is a hack to support both modules with default exports (the
+          // common case) and loaders that need to export something directly.
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          if (result.default) {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            this.#result = result.default as TModule;
+          } else {
+            this.#result = result as TModule;
+          }
+          return this.#result;
+        })
+        .catch((error) => {
+          this.#error = error;
+          throw error;
+        });
+      this.#promise = promise;
+    }
+    return promise;
+  }
 
-	/**
-	 * Returns the result, if available. This can be useful to check if the value
-	 * is resolved yet.
-	 */
-	getModuleIfRequired(): TModule | null {
-		return this.#result;
-	}
+  /**
+   * Returns the result, if available. This can be useful to check if the value
+   * is resolved yet.
+   */
+  getModuleIfRequired(): TModule | null {
+    return this.#result;
+  }
 
-	/**
-	 * This is the key method for integrating with React Suspense. Read will:
-	 * - "Suspend" if the resource is still pending (currently implemented as
-	 *   throwing a Promise, though this is subject to change in future
-	 *   versions of React)
-	 * - Throw an error if the resource failed to load.
-	 * - Return the data of the resource if available.
-	 */
-	read() {
-		if (this.#result != null) {
-			return this.#result;
-		} else if (this.#error != null) {
-			throw this.#error;
-		} else {
-			throw this.load();
-		}
-	}
+  /**
+   * This is the key method for integrating with React Suspense. Read will:
+   * - "Suspend" if the resource is still pending (currently implemented as
+   *   throwing a Promise, though this is subject to change in future
+   *   versions of React)
+   * - Throw an error if the resource failed to load.
+   * - Return the data of the resource if available.
+   */
+  read() {
+    if (this.#result != null) {
+      return this.#result;
+    } else if (this.#error != null) {
+      throw this.#error;
+    } else {
+      throw this.load();
+    }
+  }
 
-	/**
-	 *
-	 */
-	getModuleId(): string {
-		return this.#moduleId;
-	}
+  /**
+   *
+   */
+  getModuleId(): string {
+    return this.#moduleId;
+  }
 }
 
 /**
@@ -115,13 +115,13 @@ class Resource<TModule> implements JSResourceReference<TModule> {
  * @param {*} loader A method to load the resource's data if necessary
  */
 export default function JSResource<TModule>(
-	moduleId: string,
-	loader: Loader<TModule>
+  moduleId: string,
+  loader: Loader<TModule>
 ): Resource<TModule> {
-	let resource = resourceMap.get(moduleId);
-	if (resource == null) {
-		resource = new Resource(moduleId, loader);
-		resourceMap.set(moduleId, resource);
-	}
-	return resource;
+  let resource = resourceMap.get(moduleId);
+  if (resource == null) {
+    resource = new Resource(moduleId, loader);
+    resourceMap.set(moduleId, resource);
+  }
+  return resource;
 }

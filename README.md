@@ -1,4 +1,4 @@
-# @kejistan/react-router-relay
+# @loop-payments/react-router-relay
 
 Utilities and components to take advantage of Relay's preloaded queries when using react-router's data routers. This follows Relay's entrypoint pattern.
 
@@ -9,7 +9,7 @@ Entrypoints work by defining the component, generally using a preloaded query, a
 ### MyPage.tsx
 
 ```typescript
-import type { SimpleEntryPointProps } from '@kejistan/react-router-relay';
+import type { SimpleEntryPointProps } from '@loop-payments/react-router-relay';
 import { usePreloadedQuery, graphql } from 'react-relay';
 
 import type MyPageQuery from './__generated__/MyPageQuery.graphql';
@@ -37,7 +37,7 @@ export default MyPage({ queries }: Props) {
 import {
   type SimpleEntryPoint,
   JSResource,
-} from "@kejistan/react-router-relay";
+} from "@loop-payments/react-router-relay";
 import nullthrows from "nullthrows";
 
 import type MyPage from "./MyPage";
@@ -67,13 +67,13 @@ export default entryPoint;
 You need to use one of react-router's data routers and pre-process the routes via `preparePreloadableRoutes` before passing them into the router.
 
 ```typescript
-import { useMemo, useRef } from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { useRelayEnvironment } from "react-relay";
 import {
   type EntryPointRouteObject,
   preparePreloadableRoutes,
-} from "@kejistan/react-router-relay";
+} from "@loop-payments/react-router-relay";
+import { useMemo, useRef } from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { useRelayEnvironment } from "react-relay";
 
 import MyPageEntryPoint from "./MyPage.entrypoint";
 

@@ -1,5 +1,5 @@
 {
-	"name": "@kejistan/react-router-relay",
+	"name": "@loop-payments/react-router-relay",
 	"version": "0.0.1",
 	"description": "Relay integration for react-router",
 	"main": "dist/index.js",
@@ -10,7 +10,7 @@
 	"scripts": {
 		"build": "tsc -p build.tsconfig.json"
 	},
-	"author": "Sean Nicolay",
+	"author": "engineering@loop.com",
 	"license": "MIT",
 	"devDependencies": {
 		"@types/react-relay": "^14.1.4",
@@ -22,7 +22,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/kejistan/react-router-relay.git"
+		"url": "git+https://github.com/loop-payments/react-router-relay.git"
 	},
 	"keywords": [
 		"graphql",
@@ -30,9 +30,9 @@
 		"react-router"
 	],
 	"bugs": {
-		"url": "https://github.com/kejistan/react-router-relay/issues"
+		"url": "https://github.com/loop-payments/react-router-relay/issues"
 	},
-	"homepage": "https://github.com/kejistan/react-router-relay#readme",
+	"homepage": "https://github.com/loop-payments/react-router-relay#readme",
 	"peerDependencies": {
 		"react-relay": ">=15.0.0",
 		"react-router-dom": ">=6.4.0"
