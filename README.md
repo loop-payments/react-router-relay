@@ -106,7 +106,7 @@ export default function MyRouter() {
 
 ## Link
 
-This package includes a wrapper around `react-router-dom`'s `Link` component. Using this component is optional. This adds a basic pre-fetch to the link that will load the JSResources for the destination on hover or focus events.
+This package includes a wrapper around `react-router-dom`'s `Link` component. Using this component is optional. This adds a basic pre-fetch to the link that will load the JSResources for the destination on hover or focus events, and start fetching data on mouse down.
 
 ## A note on JSResource
 

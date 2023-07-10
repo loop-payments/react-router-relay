@@ -11,38 +11,38 @@ type Props = LinkProps;
  * the loader, which will start requesting graphql data, on mouse down.
  */
 export default function Link({ onMouseEnter, onFocus, onMouseDown, ...props }: Props) {
-  const fetchResources = useLinkResourceLoadHandler(props.to);
-  const fetchData = useLinkDataLoadHandler(props.to);
+	const fetchResources = useLinkResourceLoadHandler(props.to);
+	const fetchData = useLinkDataLoadHandler(props.to);
  
-  const handleMouseEnter = useCallback(
-    (e: MouseEvent<HTMLAnchorElement>) => {
-      fetchResources();
-      onMouseEnter?.(e);
-    },
-    [onMouseEnter, fetchResources],
-  );
-  const handleFocus = useCallback(
-    (e: FocusEvent<HTMLAnchorElement>) => {
-      fetchResources();
-      onFocus?.(e);
-    },
-    [onFocus, fetchResources],
-  );
-  const handleMouseDown = useCallback(
-    (e: MouseEvent<HTMLAnchorElement>) => {
-      fetchResources();
-      fetchData();
-      onMouseDown?.(e);
-    },
-    [onMouseDown, fetchResources, fetchData]
-  );
+	const handleMouseEnter = useCallback(
+		(e: MouseEvent<HTMLAnchorElement>) => {
+			fetchResources();
+			onMouseEnter?.(e);
+		},
+		[onMouseEnter, fetchResources],
+	);
+	const handleFocus = useCallback(
+		(e: FocusEvent<HTMLAnchorElement>) => {
+			fetchResources();
+			onFocus?.(e);
+		},
+		[onFocus, fetchResources],
+	);
+	const handleMouseDown = useCallback(
+		(e: MouseEvent<HTMLAnchorElement>) => {
+			fetchResources();
+			fetchData();
+			onMouseDown?.(e);
+		},
+		[onMouseDown, fetchResources, fetchData]
+	);
 
-  return (
-    <RouterLink
-      {...props}
-      onMouseEnter={handleMouseEnter}
-      onFocus={handleFocus}
-      onMouseDown={handleMouseDown}
-    />
-  );
+	return (
+		<RouterLink
+			{...props}
+			onMouseEnter={handleMouseEnter}
+			onFocus={handleFocus}
+			onMouseDown={handleMouseDown}
+		/>
+	);
 }
