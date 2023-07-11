@@ -1,7 +1,13 @@
-import { type MouseEvent, type FocusEvent, useCallback } from 'react';
-import { Link as RouterLink, type LinkProps } from 'react-router-dom';
-import { useLinkResourceLoadHandler } from './useLinkResourceLoadHandler';
-import { useLinkDataLoadHandler } from './useLinkDataLoadHandler';
+import {
+  type MouseEvent,
+  type FocusEvent,
+  useCallback,
+  useEffect,
+} from "react";
+import { Link as RouterLink, type LinkProps } from "react-router-dom";
+import { useLinkResourceLoadHandler } from "./useLinkResourceLoadHandler";
+import { useLinkDataLoadHandler } from "./useLinkDataLoadHandler";
+import { useLinkEntryPointLoadHandler } from "./useLinkEntryPointLoadHandler";
 
 type Props = LinkProps;
 
@@ -10,23 +16,33 @@ type Props = LinkProps;
  * This will load the target JSResources on hover or focus, and will trigger
  * the loader, which will start requesting graphql data, on mouse down.
  */
-export default function Link({ onMouseEnter, onFocus, onMouseDown, ...props }: Props) {
+export default function Link({
+  onMouseEnter,
+  onFocus,
+  onMouseDown,
+  ...props
+}: Props) {
+  const fetchEntryPoint = useLinkEntryPointLoadHandler(props.to);
   const fetchResources = useLinkResourceLoadHandler(props.to);
   const fetchData = useLinkDataLoadHandler(props.to);
- 
+
+  useEffect(() => {
+    fetchEntryPoint();
+  }, []);
+
   const handleMouseEnter = useCallback(
     (e: MouseEvent<HTMLAnchorElement>) => {
       fetchResources();
       onMouseEnter?.(e);
     },
-    [onMouseEnter, fetchResources],
+    [onMouseEnter, fetchResources]
   );
   const handleFocus = useCallback(
     (e: FocusEvent<HTMLAnchorElement>) => {
       fetchResources();
       onFocus?.(e);
     },
-    [onFocus, fetchResources],
+    [onFocus, fetchResources]
   );
   const handleMouseDown = useCallback(
     (e: MouseEvent<HTMLAnchorElement>) => {

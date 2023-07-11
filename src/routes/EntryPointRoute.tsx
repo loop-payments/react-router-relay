@@ -1,25 +1,37 @@
-import { type ComponentType, useEffect } from 'react';
-import type {
-  EntryPoint,
-  EntryPointProps,
-  JSResourceReference,
-} from 'react-relay';
-import { useLoaderData } from 'react-router-dom';
-import type { OperationType } from 'relay-runtime';
+import { type ComponentType, useEffect } from "react";
+import type { EntryPoint, EntryPointProps } from "react-relay";
+import { useLoaderData } from "react-router-dom";
+import type { OperationType } from "relay-runtime";
 
 import type {
   BaseEntryPointComponent,
-} from './entry-point.types';
-import { InternalPreload } from './internal-preload-symbol';
+  LazyLoadable,
+  SimpleEntryPoint,
+} from "./entry-point.types";
+import { InternalPreload } from "./internal-preload-symbol";
 
 const preloadsToDispose = new Set();
 
+export type PreloadableComponent = ComponentType & {
+  [InternalPreload]?: {
+    entryPoint: () => Promise<unknown>;
+    resource: () => Promise<unknown>;
+  };
+};
+
 export default function EntryPointRoute(
-  resource: JSResourceReference<BaseEntryPointComponent>,
+  entryPoint: LazyLoadable<SimpleEntryPoint<BaseEntryPointComponent, any>>
 ): ComponentType {
-  const Hoc: ComponentType & {
-    [InternalPreload]?: () => Promise<unknown>;
-  } = () => {
+  let loadedEntryPoint: SimpleEntryPoint<BaseEntryPointComponent> | undefined;
+
+  const loadEntryPoint = async () => {
+    const loaded =
+      typeof entryPoint === "function" ? await entryPoint() : await entryPoint;
+    loadedEntryPoint = loaded;
+    return loaded;
+  };
+
+  const Hoc: PreloadableComponent = () => {
     const data = useLoaderData() as EntryPointProps<
       Record<string, OperationType>,
       Record<string, EntryPoint<any, any> | undefined>,
@@ -56,18 +68,24 @@ export default function EntryPointRoute(
       };
     }, [data.queries]);
 
+    if (!loadedEntryPoint) throw loadEntryPoint();
+    const resource = loadedEntryPoint.root;
     const Component = resource.getModuleIfRequired();
     if (Component) {
       return <Component {...data} />;
     }
     throw resource.load();
   };
-  Hoc.displayName = `EntryPointRoute(${resource.getModuleId()})`;
+  Hoc.displayName = `EntryPointRoute`;
 
   // This would be much better if it injected a modulepreload link. Unfortunately
   // we don't have a mechanism for getting the right bundle file name to put into
   // the href. We might be able to do it by building a rollup plugin.
-  Hoc[InternalPreload] = () => resource.load();
+  Hoc[InternalPreload] = {
+    entryPoint: loadEntryPoint,
+    resource: () =>
+      loadEntryPoint().then((entryPoint) => entryPoint.root.load()),
+  };
 
   return Hoc;
 }

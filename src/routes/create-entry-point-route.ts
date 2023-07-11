@@ -4,6 +4,7 @@ import type { ComponentType } from "react";
 
 import type {
   BaseEntryPointComponent,
+  LazyLoadable,
   PreloaderContextProvider,
   SimpleEntryPoint,
 } from "./entry-point.types";
@@ -18,12 +19,14 @@ export function createEntryPointRoute<
   Component extends BaseEntryPointComponent,
   PreloaderContext = undefined,
 >(
-  entryPoint: SimpleEntryPoint<Component, PreloaderContext>,
+  entryPoint: LazyLoadable<SimpleEntryPoint<Component, PreloaderContext>>,
   environmentProvider: IEnvironmentProvider<never>,
   contextProvider?: PreloaderContextProvider<PreloaderContext>
 ): EntryPointRouteProperties {
-  function loader(args: LoaderFunctionArgs): any {
-    const { queries: queryArgs, ...props } = entryPoint.getPreloadProps({
+  async function loader(args: LoaderFunctionArgs): Promise<any> {
+    const loadedEntryPoint =
+      typeof entryPoint === "function" ? await entryPoint() : await entryPoint;
+    const { queries: queryArgs, ...props } = loadedEntryPoint.getPreloadProps({
       ...args,
       preloaderContext: contextProvider?.getPreloaderContext() as any,
     });
@@ -52,9 +55,6 @@ export function createEntryPointRoute<
 
   return {
     loader,
-    // The types around entrypoints are not super good in typescript.
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    Component: EntryPointRoute(entryPoint.root),
+    Component: EntryPointRoute(entryPoint),
   };
 }

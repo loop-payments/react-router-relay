@@ -4,7 +4,7 @@ import type {
   NonIndexRouteObject,
   RouteObject,
 } from "react-router-dom";
-import type { EntryPointParams } from "./entry-point.types";
+import type { EntryPointParams, LazyLoadable } from "./entry-point.types";
 
 type BadEntryPointType = {
   readonly root: JSResourceReference<EntryPointComponent<any, any, any, any>>;
@@ -16,7 +16,7 @@ export interface EntryPointIndexRouteObject
     IndexRouteObject,
     "loader" | "action" | "element" | "Component" | "lazy"
   > {
-  entryPoint: BadEntryPointType;
+  entryPoint: LazyLoadable<BadEntryPointType>;
 }
 
 export interface EntryPointNonIndexRouteObject
@@ -24,7 +24,7 @@ export interface EntryPointNonIndexRouteObject
     NonIndexRouteObject,
     "loader" | "action" | "element" | "Component" | "lazy"
   > {
-  entryPoint: BadEntryPointType;
+  entryPoint: LazyLoadable<BadEntryPointType>;
   children?: Array<EntryPointRouteObject>;
 }
 
