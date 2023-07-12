@@ -27,8 +27,8 @@ export default function Link({
   const fetchData = useLinkDataLoadHandler(props.to);
 
   useEffect(() => {
-    fetchEntryPoint();
-  }, []);
+    (requestIdleCallback ?? requestAnimationFrame)(fetchEntryPoint);
+  }, [fetchEntryPoint]);
 
   const handleMouseEnter = useCallback(
     (e: MouseEvent<HTMLAnchorElement>) => {
