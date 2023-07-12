@@ -22,14 +22,15 @@ export function createEntryPointRoute<
   Component extends BaseEntryPointComponent,
   PreloaderContext = undefined,
 >(
-  entryPoint: JSResourceReference<
-    SimpleEntryPoint<Component, PreloaderContext>
-  >,
+  entryPoint:
+    | SimpleEntryPoint<Component, PreloaderContext>
+    | JSResourceReference<SimpleEntryPoint<Component, PreloaderContext>>,
   environmentProvider: IEnvironmentProvider<never>,
   contextProvider?: PreloaderContextProvider<PreloaderContext>
 ): EntryPointRouteProperties {
   async function loader(args: LoaderFunctionArgs): Promise<any> {
-    const loadedEntryPoint = await entryPoint.load();
+    const loadedEntryPoint =
+      "load" in entryPoint ? await entryPoint.load() : entryPoint;
     const { queries: queryArgs, ...props } = loadedEntryPoint.getPreloadProps({
       ...args,
       preloaderContext: contextProvider?.getPreloaderContext() as any,

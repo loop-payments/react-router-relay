@@ -17,15 +17,15 @@ const preloadsToDispose = new Set();
 
 export type PreloadableComponent = ComponentType & {
   [InternalPreload]?: {
-    entryPoint: () => Promise<unknown>;
+    entryPoint: () => Promise<SimpleEntryPoint<BaseEntryPointComponent, any>>;
     resource: () => Promise<unknown>;
   };
 };
 
 export default function EntryPointRoute(
-  entryPoint: JSResourceReference<
-    SimpleEntryPoint<BaseEntryPointComponent, any>
-  >
+  entryPoint:
+    | SimpleEntryPoint<BaseEntryPointComponent, any>
+    | JSResourceReference<SimpleEntryPoint<BaseEntryPointComponent, any>>
 ): ComponentType {
   const Hoc: PreloadableComponent = () => {
     const data = useLoaderData() as EntryPointProps<
@@ -64,22 +64,34 @@ export default function EntryPointRoute(
       };
     }, [data.queries]);
 
-    const loadedEntryPoint = entryPoint.getModuleIfRequired();
-    if (!loadedEntryPoint) throw entryPoint.load();
+    const loadedEntryPoint = (() => {
+      if (!("load" in entryPoint)) return entryPoint;
+      const loadedEntryPoint = entryPoint.getModuleIfRequired();
+      if (!loadedEntryPoint) throw entryPoint.load();
+      return loadedEntryPoint;
+    })();
     const resource = loadedEntryPoint.root;
     const Component = resource.getModuleIfRequired();
     if (!Component) throw resource.load();
     return <Component {...data} />;
   };
-  Hoc.displayName = `EntryPointRoute(${entryPoint.getModuleId()})`;
+  Hoc.displayName = `EntryPointRoute(${
+    "load" in entryPoint
+      ? entryPoint.getModuleId()
+      : entryPoint.root.getModuleId()
+  })`;
 
   // This would be much better if it injected a modulepreload link. Unfortunately
   // we don't have a mechanism for getting the right bundle file name to put into
   // the href. We might be able to do it by building a rollup plugin.
   Hoc[InternalPreload] = {
-    entryPoint: () => entryPoint.load(),
-    resource: () =>
-      entryPoint.load().then((entryPoint) => entryPoint.root.load()),
+    async entryPoint() {
+      return "load" in entryPoint ? entryPoint.load() : entryPoint;
+    },
+    async resource() {
+      const entryPoint = await this.entryPoint();
+      return entryPoint.root.load();
+    },
   };
 
   return Hoc;
