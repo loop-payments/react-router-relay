@@ -8,15 +8,15 @@ import { InternalPreload } from "./routes/internal-preload-symbol";
 import { PreloadableComponent } from "./routes/EntryPointRoute";
 
 /**
- * Returns a handler for triggering resource loading for a target. This is used
- * by Link to preload JSResources for entrypoints on hover or focus events. You
+ * Returns a handler for triggering entrypoint loading for a target. This is used
+ * by Link to preload entrypoints on render. You
  * can use this to build your own Link component if necessary.
  */
-export function useLinkResourceLoadHandler(to: To): () => void {
+export function useLinkEntryPointLoadHandler(to: To): () => void {
   const routes = useContext(UNSAFE_DataRouterContext)?.router.routes ?? [];
 
-  // Fetch the static JS resources of any entrypoints
-  const fetchResources = useCallback(() => {
+  // Fetch the entrypoint
+  const fetchEntrypoint = useCallback(() => {
     const matches = matchRoutes([...routes], to);
     if (!matches) {
       return;
@@ -37,12 +37,12 @@ export function useLinkResourceLoadHandler(to: To): () => void {
       if (maybePreloadableComponent) {
         try {
           if (InternalPreload in maybePreloadableComponent) {
-            maybePreloadableComponent[InternalPreload]?.resource().catch(
+            maybePreloadableComponent[InternalPreload]?.entryPoint().catch(
               (e: unknown) => {
                 console.warn(
                   `[react-router-relay] failed to preload ${
                     match.pathname
-                  } resource for route ${JSON.stringify(to)}`,
+                  } entrypoint for route ${JSON.stringify(to)}`,
                   e
                 );
               }
@@ -50,7 +50,7 @@ export function useLinkResourceLoadHandler(to: To): () => void {
           }
         } catch (e: unknown) {
           console.warn(
-            `[react-router-relay] failed to call resource preloader ${
+            `[react-router-relay] failed to call entrypoint preloader ${
               match.pathname
             } for route ${JSON.stringify(to)}`,
             e
@@ -60,5 +60,5 @@ export function useLinkResourceLoadHandler(to: To): () => void {
     }
   }, [routes, to]);
 
-  return fetchResources;
+  return fetchEntrypoint;
 }

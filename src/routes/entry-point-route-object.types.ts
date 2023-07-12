@@ -16,7 +16,7 @@ export interface EntryPointIndexRouteObject
     IndexRouteObject,
     "loader" | "action" | "element" | "Component" | "lazy"
   > {
-  entryPoint: BadEntryPointType;
+  entryPoint: BadEntryPointType | JSResourceReference<BadEntryPointType>;
 }
 
 export interface EntryPointNonIndexRouteObject
@@ -24,7 +24,7 @@ export interface EntryPointNonIndexRouteObject
     NonIndexRouteObject,
     "loader" | "action" | "element" | "Component" | "lazy"
   > {
-  entryPoint: BadEntryPointType;
+  entryPoint: BadEntryPointType | JSResourceReference<BadEntryPointType>;
   children?: Array<EntryPointRouteObject>;
 }
 
