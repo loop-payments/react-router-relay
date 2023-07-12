@@ -31,5 +31,3 @@ export type SimpleEntryPointProps<
 export interface PreloaderContextProvider<T> {
   getPreloaderContext(): T;
 }
-
-export type LazyLoadable<T> = T | Promise<T> | (() => T | Promise<T>);

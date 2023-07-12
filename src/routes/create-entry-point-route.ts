@@ -1,10 +1,13 @@
-import { type IEnvironmentProvider, loadQuery } from "react-relay";
+import {
+  type IEnvironmentProvider,
+  loadQuery,
+  JSResourceReference,
+} from "react-relay";
 import type { LoaderFunction, LoaderFunctionArgs } from "react-router-dom";
 import type { ComponentType } from "react";
 
 import type {
   BaseEntryPointComponent,
-  LazyLoadable,
   PreloaderContextProvider,
   SimpleEntryPoint,
 } from "./entry-point.types";
@@ -19,13 +22,14 @@ export function createEntryPointRoute<
   Component extends BaseEntryPointComponent,
   PreloaderContext = undefined,
 >(
-  entryPoint: LazyLoadable<SimpleEntryPoint<Component, PreloaderContext>>,
+  entryPoint: JSResourceReference<
+    SimpleEntryPoint<Component, PreloaderContext>
+  >,
   environmentProvider: IEnvironmentProvider<never>,
   contextProvider?: PreloaderContextProvider<PreloaderContext>
 ): EntryPointRouteProperties {
   async function loader(args: LoaderFunctionArgs): Promise<any> {
-    const loadedEntryPoint =
-      typeof entryPoint === "function" ? await entryPoint() : await entryPoint;
+    const loadedEntryPoint = await entryPoint.load();
     const { queries: queryArgs, ...props } = loadedEntryPoint.getPreloadProps({
       ...args,
       preloaderContext: contextProvider?.getPreloaderContext() as any,

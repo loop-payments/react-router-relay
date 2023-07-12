@@ -1,11 +1,14 @@
 import { type ComponentType, useEffect } from "react";
-import type { EntryPoint, EntryPointProps } from "react-relay";
+import type {
+  EntryPoint,
+  EntryPointProps,
+  JSResourceReference,
+} from "react-relay";
 import { useLoaderData } from "react-router-dom";
 import type { OperationType } from "relay-runtime";
 
 import type {
   BaseEntryPointComponent,
-  LazyLoadable,
   SimpleEntryPoint,
 } from "./entry-point.types";
 import { InternalPreload } from "./internal-preload-symbol";
@@ -20,17 +23,10 @@ export type PreloadableComponent = ComponentType & {
 };
 
 export default function EntryPointRoute(
-  entryPoint: LazyLoadable<SimpleEntryPoint<BaseEntryPointComponent, any>>
+  entryPoint: JSResourceReference<
+    SimpleEntryPoint<BaseEntryPointComponent, any>
+  >
 ): ComponentType {
-  let loadedEntryPoint: SimpleEntryPoint<BaseEntryPointComponent> | undefined;
-
-  const loadEntryPoint = async () => {
-    const loaded =
-      typeof entryPoint === "function" ? await entryPoint() : await entryPoint;
-    loadedEntryPoint = loaded;
-    return loaded;
-  };
-
   const Hoc: PreloadableComponent = () => {
     const data = useLoaderData() as EntryPointProps<
       Record<string, OperationType>,
@@ -68,23 +64,22 @@ export default function EntryPointRoute(
       };
     }, [data.queries]);
 
-    if (!loadedEntryPoint) throw loadEntryPoint();
+    const loadedEntryPoint = entryPoint.getModuleIfRequired();
+    if (!loadedEntryPoint) throw entryPoint.load();
     const resource = loadedEntryPoint.root;
     const Component = resource.getModuleIfRequired();
-    if (Component) {
-      return <Component {...data} />;
-    }
-    throw resource.load();
+    if (!Component) throw resource.load();
+    return <Component {...data} />;
   };
-  Hoc.displayName = `EntryPointRoute`;
+  Hoc.displayName = `EntryPointRoute(${entryPoint.getModuleId()})`;
 
   // This would be much better if it injected a modulepreload link. Unfortunately
   // we don't have a mechanism for getting the right bundle file name to put into
   // the href. We might be able to do it by building a rollup plugin.
   Hoc[InternalPreload] = {
-    entryPoint: loadEntryPoint,
+    entryPoint: () => entryPoint.load(),
     resource: () =>
-      loadEntryPoint().then((entryPoint) => entryPoint.root.load()),
+      entryPoint.load().then((entryPoint) => entryPoint.root.load()),
   };
 
   return Hoc;
