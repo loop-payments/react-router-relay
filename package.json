@@ -1,6 +1,6 @@
 {
   "name": "@loop-payments/react-router-relay",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Relay integration for react-router",
   "main": "dist/index.js",
   "files": [
@@ -36,5 +36,6 @@
   "peerDependencies": {
     "react-relay": ">=15.0.0",
     "react-router-dom": ">=6.4.0"
-  }
+  },
+  "packageManager": "yarn@3.6.1"
 }
