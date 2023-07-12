@@ -26,7 +26,7 @@ export function createEntryPointRoute<
     | SimpleEntryPoint<Component, PreloaderContext>
     | JSResourceReference<SimpleEntryPoint<Component, PreloaderContext>>,
   environmentProvider: IEnvironmentProvider<never>,
-  contextProvider?: PreloaderContextProvider<PreloaderContext>
+  contextProvider?: PreloaderContextProvider<PreloaderContext>,
 ): EntryPointRouteProperties {
   async function loader(args: LoaderFunctionArgs): Promise<any> {
     const loadedEntryPoint =
@@ -46,9 +46,9 @@ export function createEntryPointRoute<
           loadQuery(
             environmentProvider.getEnvironment(null),
             parameters,
-            variables
+            variables,
           ),
-        ])
+        ]),
       );
     }
 

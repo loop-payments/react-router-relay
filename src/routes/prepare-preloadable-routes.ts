@@ -21,7 +21,7 @@ import type {
 export function preparePreloadableRoutes<PreloaderContext>(
   routes: Array<EntryPointRouteObject>,
   environmentProvider: IEnvironmentProvider<never>,
-  preloaderContextProvider?: PreloaderContextProvider<PreloaderContext>
+  preloaderContextProvider?: PreloaderContextProvider<PreloaderContext>,
 ): Array<RouteObject> {
   return routes.map((route) => {
     let newRoute;
@@ -32,7 +32,7 @@ export function preparePreloadableRoutes<PreloaderContext>(
         ...createEntryPointRoute(
           entryPoint,
           environmentProvider,
-          preloaderContextProvider
+          preloaderContextProvider,
         ),
       };
     } else {
@@ -43,7 +43,7 @@ export function preparePreloadableRoutes<PreloaderContext>(
       newRoute.children = preparePreloadableRoutes(
         newRoute.children,
         environmentProvider,
-        preloaderContextProvider
+        preloaderContextProvider,
       );
     }
 
@@ -52,7 +52,7 @@ export function preparePreloadableRoutes<PreloaderContext>(
 }
 
 function isEntryPoint(
-  route: EntryPointRouteObject
+  route: EntryPointRouteObject,
 ): route is EntryPointIndexRouteObject | EntryPointNonIndexRouteObject {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore

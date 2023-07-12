@@ -116,7 +116,7 @@ class Resource<TModule> implements JSResourceReference<TModule> {
  */
 export default function JSResource<TModule>(
   moduleId: string,
-  loader: Loader<TModule>
+  loader: Loader<TModule>,
 ): Resource<TModule> {
   let resource = resourceMap.get(moduleId);
   if (resource == null) {
