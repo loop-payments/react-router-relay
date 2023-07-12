@@ -43,9 +43,9 @@ export function useLinkResourceLoadHandler(to: To): () => void {
                   `[react-router-relay] failed to preload ${
                     match.pathname
                   } resource for route ${JSON.stringify(to)}`,
-                  e
+                  e,
                 );
-              }
+              },
             );
           }
         } catch (e: unknown) {
@@ -53,7 +53,7 @@ export function useLinkResourceLoadHandler(to: To): () => void {
             `[react-router-relay] failed to call resource preloader ${
               match.pathname
             } for route ${JSON.stringify(to)}`,
-            e
+            e,
           );
         }
       }

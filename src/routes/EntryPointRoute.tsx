@@ -25,7 +25,7 @@ export type PreloadableComponent = ComponentType & {
 export default function EntryPointRoute(
   entryPoint:
     | SimpleEntryPoint<BaseEntryPointComponent, any>
-    | JSResourceReference<SimpleEntryPoint<BaseEntryPointComponent, any>>
+    | JSResourceReference<SimpleEntryPoint<BaseEntryPointComponent, any>>,
 ): ComponentType {
   const Hoc: PreloadableComponent = () => {
     const data = useLoaderData() as EntryPointProps<

@@ -24,7 +24,7 @@ export function useLinkDataLoadHandler(to: To): () => void {
 
     const url = new URL(
       resolvedPath.pathname + resolvedPath.search,
-      window.location.origin
+      window.location.origin,
     );
     const request = new Request(url);
     for (const match of matches) {
@@ -40,7 +40,7 @@ export function useLinkDataLoadHandler(to: To): () => void {
           `[react-router-relay] failed to preload ${
             match.pathname
           } data for route ${JSON.stringify(to)}`,
-          e
+          e,
         );
       }
     }
