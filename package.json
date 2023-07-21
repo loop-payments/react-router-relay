@@ -1,6 +1,6 @@
 {
   "name": "@loop-payments/react-router-relay",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Relay integration for react-router",
   "main": "dist/index.js",
   "files": [
