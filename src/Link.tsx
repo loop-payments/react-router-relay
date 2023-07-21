@@ -27,7 +27,7 @@ export default function Link({
   const fetchData = useLinkDataLoadHandler(props.to);
 
   useEffect(() => {
-    if ('requestIdleCallback'in window) {
+    if ('requestIdleCallback' in window) {
       const id = requestIdleCallback(fetchEntryPoint);
       return () => cancelIdleCallback(id);
     } else {
