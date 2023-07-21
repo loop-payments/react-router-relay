@@ -27,7 +27,13 @@ export default function Link({
   const fetchData = useLinkDataLoadHandler(props.to);
 
   useEffect(() => {
-    (requestIdleCallback ?? requestAnimationFrame)(fetchEntryPoint);
+    if ('requestIdleCallback'in window) {
+      const id = requestIdleCallback(fetchEntryPoint);
+      return () => cancelIdleCallback(id);
+    } else {
+      const id = requestAnimationFrame(fetchEntryPoint);
+      return () => cancelAnimationFrame(id);
+    }
   }, [fetchEntryPoint]);
 
   const handleMouseEnter = useCallback(
