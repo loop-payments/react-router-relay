@@ -20,7 +20,7 @@ type Props = SimpleEntryPointProps<{
 
 export default MyPage({ queries }: Props) {
   const data = usePreloadedQuery(graphql`
-    query MyPageQuery($someId: ID!) {
+    query MyPageQuery($someId: ID!) @preloadable {
       node(id: $someId) {
         __typename
       }
@@ -41,6 +41,32 @@ import {
 import nullthrows from "nullthrows";
 
 import type MyPage from "./MyPage";
+import MyPageQueryParameters from "./__generated__/MyPageQuery$parameters";
+
+const entryPoint: SimpleEntryPoint<typeof MyPage> = {
+  root: JSResource("MyPage", () => import("./MyPage")),
+  getPreloadedProps({ params }) {
+    return {
+      queries: {
+        query: {
+          parameters: MyPageQueryParameters,
+          variables: {
+            someId: nullthrows(params.someId),
+          },
+        },
+      },
+    };
+  },
+};
+
+export default entryPoint;
+```
+
+#### Note for Relay < 16.2
+
+If you're using relay prior to 16.2.0 you won't be able to use the `@preloadable` annotation and thus won't be able to generate `$parameters` files. You can still use entrypoints but they'll need to import concrete request objects from the `.graphql` files instead.
+
+```ts
 import MyPageQuery from "./__generated__/MyPageQuery.graphql";
 
 const entryPoint: SimpleEntryPoint<typeof MyPage> = {
@@ -58,8 +84,6 @@ const entryPoint: SimpleEntryPoint<typeof MyPage> = {
     };
   },
 };
-
-export default entryPoint;
 ```
 
 ### MyRouter.tsx
