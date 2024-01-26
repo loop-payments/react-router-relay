@@ -64,7 +64,7 @@ export default entryPoint;
 
 #### Note for Relay < 16.2
 
-If you're using relay prior to 16.2.0 you won't be able to use the `@preloadable` annotation and thus won't be able to generate `$parameters` files. You can still use entrypoints but they'll need to import concrete request objects from the `.graphql` files instead.
+If you're using relay prior to 16.2.0 you won't be able to use the `@preloadable` annotation and thus won't be able to generate `$parameters` files. You can still use entry points, but they'll need to import concrete request objects from the `.graphql` files instead.
 
 ```ts
 import MyPageQuery from "./__generated__/MyPageQuery.graphql";
