@@ -2,6 +2,10 @@ import {
   type IEnvironmentProvider,
   loadQuery,
   JSResourceReference,
+  PreloadOptions,
+  GraphQLTaggedNode,
+  PreloadableConcreteRequest,
+  EnvironmentProviderOptions,
 } from "react-relay";
 import type { LoaderFunction, LoaderFunctionArgs } from "react-router-dom";
 import type { ComponentType } from "react";
@@ -26,7 +30,7 @@ export function createEntryPointRoute<
     | SimpleEntryPoint<Component, PreloaderContext>
     | JSResourceReference<SimpleEntryPoint<Component, PreloaderContext>>,
   environmentProvider: IEnvironmentProvider<never>,
-  contextProvider?: PreloaderContextProvider<PreloaderContext>,
+  contextProvider?: PreloaderContextProvider<PreloaderContext>
 ): EntryPointRouteProperties {
   async function loader(args: LoaderFunctionArgs): Promise<any> {
     const loadedEntryPoint =
@@ -38,17 +42,35 @@ export function createEntryPointRoute<
     let queries = undefined;
     if (queryArgs) {
       queries = Object.fromEntries(
-        Object.entries(queryArgs).map(([key, { parameters, variables }]) => [
-          key,
-          // This can leak if we fail to mount the EntryPointRoute HOC. Not
-          // sure if we can handle this better without improved support in
-          // react-router.
-          loadQuery(
-            environmentProvider.getEnvironment(null),
-            parameters,
-            variables,
-          ),
-        ]),
+        Object.entries(queryArgs).map(
+          ([
+            key,
+            { parameters, variables, options, environmentProviderOptions },
+          ]: [
+            string,
+            {
+              parameters: GraphQLTaggedNode | PreloadableConcreteRequest<any>;
+              variables: any;
+              options: PreloadOptions | null | undefined;
+              environmentProviderOptions:
+                | EnvironmentProviderOptions
+                | null
+                | undefined;
+            },
+          ]) => [
+            key,
+            // This can leak if we fail to mount the EntryPointRoute HOC. Not
+            // sure if we can handle this better without improved support in
+            // react-router.
+            loadQuery(
+              environmentProvider.getEnvironment(null),
+              parameters,
+              variables,
+              options ?? undefined,
+              environmentProviderOptions ?? undefined
+            ),
+          ]
+        )
       );
     }
 
