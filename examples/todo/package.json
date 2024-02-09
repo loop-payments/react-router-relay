@@ -9,6 +9,7 @@
     "lint": "eslint ./ --cache"
   },
   "dependencies": {
+    "@loop-payments/react-router-relay": "../..",
     "classnames": "2.3.1",
     "express": "^4.17.3",
     "express-graphql": "^0.12.0",
