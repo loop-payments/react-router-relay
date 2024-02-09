@@ -1,17 +1,14 @@
-// @flow
-import * as React from 'react';
-import {useEffect, useRef, useState} from 'react';
-
-type Props = {|
-  +className: string,
-  +commitOnBlur?: boolean,
-  +initialValue?: string,
-  +onCancel?: () => void,
-  +onDelete?: () => void,
-  +onSave: (string) => void,
-  +placeholder?: string,
-|};
-
+import * as React from "react";
+import { useEffect, useRef, useState } from "react";
+type Props = {
+  readonly className: string;
+  readonly commitOnBlur?: boolean;
+  readonly initialValue?: string;
+  readonly onCancel?: () => void;
+  readonly onDelete?: () => void;
+  readonly onSave: (arg0: string) => void;
+  readonly placeholder?: string;
+};
 const ENTER_KEY_CODE = 13;
 const ESC_KEY_CODE = 27;
 
@@ -22,11 +19,10 @@ const TodoTextInput = ({
   onCancel,
   onDelete,
   onSave,
-  placeholder,
-}: Props): React$Element<'input'> => {
+  placeholder
+}: Props): React.ReactElement<React.ComponentProps<"input">, "input"> => {
   const [text, setText] = useState<string>(initialValue || '');
   const inputRef = useRef();
-
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
@@ -52,10 +48,9 @@ const TodoTextInput = ({
     }
   };
 
-  const handleChange = (e: SyntheticEvent<HTMLInputElement>) =>
-    setText(e.currentTarget.value);
+  const handleChange = (e: React.SyntheticEvent<HTMLInputElement>) => setText(e.currentTarget.value);
 
-  const handleKeyDown = (e: SyntheticKeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (onCancel && e.keyCode === ESC_KEY_CODE) {
       onCancel();
     } else if (e.keyCode === ENTER_KEY_CODE) {
@@ -63,17 +58,7 @@ const TodoTextInput = ({
     }
   };
 
-  return (
-    <input
-      className={className}
-      onBlur={handleBlur}
-      onChange={handleChange}
-      onKeyDown={handleKeyDown}
-      placeholder={placeholder}
-      ref={inputRef}
-      value={text}
-    />
-  );
+  return <input className={className} onBlur={handleBlur} onChange={handleChange} onKeyDown={handleKeyDown} placeholder={placeholder} ref={inputRef} value={text} />;
 };
 
 export default TodoTextInput;

@@ -1,9 +1,6 @@
-// @flow
-import type {RenameTodoMutation_todo$key} from 'relay/RenameTodoMutation_todo.graphql';
-
-import {useCallback} from 'react';
-import {graphql, useFragment, useMutation} from 'react-relay';
-
+import type { RenameTodoMutation_todo$key } from "relay/RenameTodoMutation_todo.graphql";
+import { useCallback } from "react";
+import { graphql, useFragment, useMutation } from "react-relay";
 const mutation = graphql`
   mutation RenameTodoMutation($input: RenameTodoInput!) {
     renameTodo(input: $input) {
@@ -14,35 +11,28 @@ const mutation = graphql`
     }
   }
 `;
-
-export function useRenameTodoMutation(
-  todoRef: RenameTodoMutation_todo$key,
-): (string) => void {
-  const todo = useFragment(
-    graphql`
+export function useRenameTodoMutation(todoRef: RenameTodoMutation_todo$key): (arg0: string) => void {
+  const todo = useFragment(graphql`
       fragment RenameTodoMutation_todo on Todo {
         id
         text
       }
-    `,
-    todoRef,
-  );
+    `, todoRef);
   const [commit] = useMutation(mutation);
-
   return useCallback((text: string) => {
     const payload = {
       id: todo.id,
-      text,
+      text
     };
     commit({
       variables: {
-        input: payload,
+        input: payload
       },
       optimisticResponse: {
         renameTodo: {
-          todo: payload,
-        },
-      },
+          todo: payload
+        }
+      }
     });
   });
 }
