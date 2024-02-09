@@ -17,7 +17,6 @@ const QUERY_MAP_FILE: string = path.resolve(
 
 // Serve the Relay app
 // Calling webpack() without a callback as 2nd property returns a Compiler object.
-// The libdefs don't like it, but it's fine.  $FlowFixMe https://webpack.js.org/api/node/
 const compiler = webpack({
   mode: 'development',
   entry: [

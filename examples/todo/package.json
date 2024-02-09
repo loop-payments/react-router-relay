@@ -35,10 +35,12 @@
     "@babel/preset-flow": "^7.13.13",
     "@babel/preset-react": "^7.13.13",
     "@babel/runtime": "^7.14.0",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.2",
     "babel-plugin-relay": "^13.0.0-rc.2",
-    "eslint": "^7.27.0",
+    "eslint": "^8.56.0",
     "eslint-config-fbjs": "^3.1.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-babel": "^5.3.1",
@@ -47,10 +49,9 @@
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.23.2",
     "eslint-plugin-relay": "^1.8.1",
-    "flow-bin": "^0.168.0",
-    "flow-typed": "^2.6.0",
     "prettier": "^2.3.0",
     "relay-compiler": "^14.0.0",
+    "typescript": "^5.3.3",
     "webpack": "^4.47.0",
     "webpack-dev-server": "3.10.3"
   },
@@ -61,8 +62,8 @@
     "jsxBracketSameLine": true
   },
   "relay": {
-    "language": "flow",
-    "src": "./js",
+    "language": "typescript",
+    "src": "./src",
     "schema": "./data/schema.graphql",
     "artifactDirectory": "./__generated__/relay",
     "persistConfig": {
