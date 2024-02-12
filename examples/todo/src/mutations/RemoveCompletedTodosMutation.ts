@@ -1,7 +1,12 @@
-import type { RemoveCompletedTodosMutation_user$key } from "relay/RemoveCompletedTodosMutation_user.graphql";
-import type { RemoveCompletedTodosMutation_todoConnection$key } from "relay/RemoveCompletedTodosMutation_todoConnection.graphql";
-import { useCallback } from "react";
-import { graphql, useFragment, useMutation } from "react-relay";
+import type {
+  RemoveCompletedTodosMutation_user$key,
+} from '../../__generated__/relay/RemoveCompletedTodosMutation_user.graphql';
+import type {
+  RemoveCompletedTodosMutation_todoConnection$key,
+} from '../../__generated__/relay/RemoveCompletedTodosMutation_todoConnection.graphql';
+import {useCallback} from 'react';
+import {graphql, useFragment, useMutation} from 'react-relay';
+
 const mutation = graphql`
   mutation RemoveCompletedTodosMutation(
     $connections: [ID!]!
@@ -17,6 +22,7 @@ const mutation = graphql`
     }
   }
 `;
+
 export function useRemoveCompletedTodosMutation(userRef: RemoveCompletedTodosMutation_user$key, todoConnectionRef: RemoveCompletedTodosMutation_todoConnection$key): () => void {
   const user = useFragment(graphql`
       fragment RemoveCompletedTodosMutation_user on User {
@@ -42,9 +48,9 @@ export function useRemoveCompletedTodosMutation(userRef: RemoveCompletedTodosMut
     commit({
       variables: {
         input: {
-          userId: user.userId
+          userId: user.userId,
         },
-        connections: [todoConnection.__id]
+        connections: [todoConnection.__id],
       },
       optimisticResponse: {
         removeCompletedTodos: {
@@ -52,10 +58,10 @@ export function useRemoveCompletedTodosMutation(userRef: RemoveCompletedTodosMut
           user: {
             id: user.id,
             completedCount: 0,
-            totalCount: user.totalCount - completedTodoIds.length
-          }
-        }
-      }
+            totalCount: user.totalCount - completedTodoIds.length,
+          },
+        },
+      },
     });
   }, [commit, user, todoConnection]);
 }

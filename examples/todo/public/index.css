@@ -299,6 +299,10 @@ label[for='toggle-all'] {
   border-color: rgba(175, 47, 47, 0.2);
 }
 
+.filters li a.active {
+  color: #b83f45;
+}
+
 .clear-completed,
 html .clear-completed:active {
   float: right;

@@ -19,6 +19,7 @@ const TodoAppEntryPoint: SimpleEntryPoint<TodoApp> = {
           },
           variables: {
             userId: params?.userId ?? 'me',
+            status: params.status,
           },
         },
       },

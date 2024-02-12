@@ -1,13 +1,13 @@
-import type { Todo_todo$key } from "relay/Todo_todo.graphql";
-import type { Todo_user$key } from "relay/Todo_user.graphql";
-import { useChangeTodoStatusMutation } from "../mutations/ChangeTodoStatusMutation";
-import { useRenameTodoMutation } from "../mutations/RenameTodoMutation";
-import { useRemoveTodoMutation } from "../mutations/RemoveTodoMutation";
-import TodoTextInput from "./TodoTextInput";
-import * as React from "react";
-import { useState } from "react";
-import { graphql, useFragment } from "react-relay";
-import classnames from "classnames";
+import type {Todo_todo$key} from '../../__generated__/relay/Todo_todo.graphql';
+import type {Todo_user$key} from '../../__generated__/relay/Todo_user.graphql';
+import {useChangeTodoStatusMutation} from '../mutations/ChangeTodoStatusMutation';
+import {useRenameTodoMutation} from '../mutations/RenameTodoMutation';
+import {useRemoveTodoMutation} from '../mutations/RemoveTodoMutation';
+import TodoTextInput from './TodoTextInput';
+import * as React from 'react';
+import {useState} from 'react';
+import {graphql, useFragment} from 'react-relay';
+import classnames from 'classnames';
 
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 type Props = {
@@ -16,10 +16,10 @@ type Props = {
   userRef: Todo_user$key;
 };
 export default function Todo({
-  userRef,
-  todoRef,
-  todoConnectionId
-}: Props): React.ReactElement<React.ComponentProps<"li">, "li"> {
+                               userRef,
+                               todoRef,
+                               todoConnectionId,
+                             }: Props): React.ReactElement<React.ComponentProps<'li'>, 'li'> {
   const todo = useFragment(graphql`
       fragment Todo_todo on Todo {
         complete
@@ -68,15 +68,17 @@ export default function Todo({
 
   return <li className={classnames({
     completed: todo.complete,
-    editing: isEditing
+    editing: isEditing,
   })}>
-      <div className="view">
-        <input checked={todo.complete} className="toggle" onChange={handleCompleteChange} type="checkbox" />
+    <div className="view">
+      <input checked={todo.complete} className="toggle" onChange={handleCompleteChange} type="checkbox" />
 
-        <label onDoubleClick={handleLabelDoubleClick}>{todo.text}</label>
-        <button className="destroy" onClick={handleRemoveTodo} />
-      </div>
+      <label onDoubleClick={handleLabelDoubleClick}>{todo.text}</label>
+      <button className="destroy" onClick={handleRemoveTodo} />
+    </div>
 
-      {isEditing && <TodoTextInput className="edit" commitOnBlur={true} initialValue={todo.text} onCancel={handleTextInputCancel} onDelete={handleTextInputDelete} onSave={handleTextInputSave} />}
-    </li>;
+    {isEditing &&
+      <TodoTextInput className="edit" commitOnBlur={true} initialValue={todo.text} onCancel={handleTextInputCancel}
+                     onDelete={handleTextInputDelete} onSave={handleTextInputSave} />}
+  </li>;
 }

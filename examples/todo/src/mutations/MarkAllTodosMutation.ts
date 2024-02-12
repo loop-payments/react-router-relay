@@ -1,7 +1,8 @@
-import type { MarkAllTodosMutation_user$key } from "relay/MarkAllTodosMutation_user.graphql";
-import type { MarkAllTodosMutation_todoEdge$key } from "relay/MarkAllTodosMutation_todoEdge.graphql";
-import { useCallback } from "react";
-import { graphql, useFragment, useMutation } from "react-relay";
+import type {MarkAllTodosMutation_user$key} from '../../__generated__/relay/MarkAllTodosMutation_user.graphql';
+import type {MarkAllTodosMutation_todoEdge$key} from '../../__generated__/relay/MarkAllTodosMutation_todoEdge.graphql';
+import {useCallback} from 'react';
+import {graphql, useFragment, useMutation} from 'react-relay';
+
 const mutation = graphql`
   mutation MarkAllTodosMutation($input: MarkAllTodosInput!) {
     markAllTodos(input: $input) {
@@ -16,6 +17,7 @@ const mutation = graphql`
     }
   }
 `;
+
 export function useMarkAllTodosMutation(userRef: MarkAllTodosMutation_user$key, todoEdgeRef: MarkAllTodosMutation_todoEdge$key): (arg0: boolean) => void {
   const user = useFragment(graphql`
       fragment MarkAllTodosMutation_user on User {
@@ -37,25 +39,25 @@ export function useMarkAllTodosMutation(userRef: MarkAllTodosMutation_user$key, 
       variables: {
         input: {
           userId: user.userId,
-          complete
-        }
+          complete,
+        },
       },
       optimisticResponse: {
         markAllTodos: {
           changedTodos: todos.map(({
-            node: {
-              id
-            }
-          }) => ({
+                                     node: {
+                                       id,
+                                     },
+                                   }) => ({
             id,
-            complete
+            complete,
           })),
           user: {
             id: user.id,
-            completedCount: complete ? user.totalCount : 0
-          }
-        }
-      }
+            completedCount: complete ? user.totalCount : 0,
+          },
+        },
+      },
     });
   }, [commit, user, todos]);
 }

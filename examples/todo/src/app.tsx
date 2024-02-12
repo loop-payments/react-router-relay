@@ -35,11 +35,20 @@ const appEntryPoint: EntryPointRouteObject = {
   entryPoint: TodoAppEntryPoint,
 };
 
-const routes = preparePreloadableRoutes([appEntryPoint], {
-  getEnvironment() {
-    return modernEnvironment;
-  },
-});
+const statusEntryPoint: EntryPointRouteObject = {
+  path: '/:status',
+  entryPoint: TodoAppEntryPoint,
+};
+
+const routes = preparePreloadableRoutes(
+  [
+    appEntryPoint,
+    statusEntryPoint,
+  ], {
+    getEnvironment() {
+      return modernEnvironment;
+    },
+  });
 
 const router = createBrowserRouter(routes);
 
