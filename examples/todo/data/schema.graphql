@@ -12,7 +12,21 @@ type User implements Node {
   """The ID of an object"""
   id: ID!
   userId: String!
-  todos(status: String = "any", after: String, first: Int, before: String, last: Int): TodoConnection
+  todos(
+    status: String = "any"
+
+    """Returns the items in the list that come after the specified cursor."""
+    after: String
+
+    """Returns the first n items from the list."""
+    first: Int
+
+    """Returns the items in the list that come before the specified cursor."""
+    before: String
+
+    """Returns the last n items from the list."""
+    last: Int
+  ): TodoConnection
   totalCount: Int!
   completedCount: Int!
 }
