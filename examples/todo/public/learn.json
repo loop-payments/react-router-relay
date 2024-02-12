@@ -1,13 +1,13 @@
 {
   "relay": {
-    "name": "Relay",
-    "description": "A JavaScript framework for building data-driven React applications",
-    "homepage": "facebook.github.io/relay/",
+    "name": "react-router-relay",
+    "description": "Utilities and components to take advantage of Relay's preloaded queries when using react-router's data routers. This follows Relay's entrypoint pattern.",
+    "homepage": "https://github.com/loop-payments/react-router-relay",
     "examples": [
       {
-        "name": "Relay + express-graphql Example",
+        "name": "React Router + Relay Example",
         "url": "",
-        "source_url": "https://github.com/relayjs/relay-examples/tree/main/todo",
+        "source_url": "https://github.com/loop-payments/react-router-relay/tree/main/examples/todo",
         "type": "backend"
       }
     ],
@@ -17,30 +17,30 @@
         "links": [
           {
             "name": "Documentation",
-            "url": "https://facebook.github.io/relay/docs/quick-start-guide.html"
+            "url": "https://github.com/loop-payments/react-router-relay"
           },
           {
-            "name": "GraphQL in Relay",
-            "url": "https://facebook.github.io/relay/docs/en/graphql-in-relay.html"
+            "name": "React Router",
+            "url": "https://reactrouter.com/en/main"
           },
           {
-            "name": "Relay on GitHub",
-            "url": "https://github.com/facebook/relay"
+            "name": "Relay",
+            "url": "https://relay.dev/"
           }
         ]
       },
       {
-        "heading": "Community",
+        "heading": "Unoffical Resources",
         "links": [
           {
-            "name": "Relay on StackOverflow",
-            "url": "https://stackoverflow.com/questions/tagged/relayjs"
+            "name": "Relay Entry Point Docs",
+            "url": "https://github.com/relay-tools/typescript-relayjs-examples/issues/1"
           }
         ]
       }
     ]
   },
   "templates": {
-    "todomvc": "<header> <h3><%= name %></h3> <span class=\"source-links\"> <% if (typeof examples !== 'undefined') { %> <% examples.forEach(function (example) { %> <h5><%= example.name %></h5> <% if (!location.href.match(example.url + '/')) { %> <a class=\"demo-link\" data-type=\"<%= example.type === 'backend' ? 'external' : 'local' %>\" href=\"<%= example.url %>\">Demo</a>, <% } if (example.type === 'backend') { %><a href=\"<%= example.source_url %>\"><% } else { %><a href=\"https://github.com/tastejs/todomvc/tree/gh-pages/<%= example.source_url ? example.source_url : example.url %>\"><% } %>Source</a> <% }); %> <% } %> </span> </header> <hr> <blockquote class=\"quote speech-bubble\"> <p><%= description %></p> <footer> <a href=\"http://<%= homepage %>\"><%= name %></a> </footer> </blockquote> <% if (typeof link_groups !== 'undefined') { %> <hr> <% link_groups.forEach(function (link_group) { %> <h4><%= link_group.heading %></h4> <ul> <% link_group.links.forEach(function (link) { %> <li> <a href=\"<%= link.url %>\"><%= link.name %></a> </li> <% }); %> </ul> <% }); %> <% } %> <footer> <hr> <em>If you have other helpful links to share, or find any of the links above no longer work, please <a href=\"https://github.com/tastejs/todomvc/issues\">let us know</a>.</em> </footer>"
+    "todomvc": "<header> <h3><%= name %></h3> <span class=\"source-links\"> <% if (typeof examples !== 'undefined') { %> <% examples.forEach(function (example) { %> <h5><%= example.name %></h5> <% if (!location.href.match(example.url + '/')) { %> <a class=\"demo-link\" data-type=\"<%= example.type === 'backend' ? 'external' : 'local' %>\" href=\"<%= example.url %>\">Demo</a>, <% } if (example.type === 'backend') { %><a href=\"<%= example.source_url %>\"><% } else { %><a href=\"https://github.com/tastejs/todomvc/tree/gh-pages/<%= example.source_url ? example.source_url : example.url %>\"><% } %>Source</a> <% }); %> <% } %> </span> </header> <hr> <blockquote class=\"quote speech-bubble\"> <p><%= description %></p> <footer> <a href=\"http://<%= homepage %>\"><%= name %></a> </footer> </blockquote> <% if (typeof link_groups !== 'undefined') { %> <hr> <% link_groups.forEach(function (link_group) { %> <h4><%= link_group.heading %></h4> <ul> <% link_group.links.forEach(function (link) { %> <li> <a href=\"<%= link.url %>\"><%= link.name %></a> </li> <% }); %> </ul> <% }); %> <% } %> <footer> <hr> <em>If you have other helpful links to share, or find any of the links above no longer work, please <a href=\"https://github.com/loop-payments/react-router-relay/issues\">let us know</a>.</em> </footer>"
   }
 }
