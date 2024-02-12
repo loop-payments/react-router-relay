@@ -62,11 +62,3 @@ root.render(
     </React.Suspense>
   </RelayEnvironmentProvider>
 );
-
-// Enable hot module replacement
-if (module.hot) {
-  module.hot.accept('./App', () => {
-    const NextApp = require('./App').default;
-    render(NextApp);
-  });
-}
