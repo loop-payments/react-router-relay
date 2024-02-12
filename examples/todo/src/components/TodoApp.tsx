@@ -1,40 +1,41 @@
-import type { TodoAppQuery } from "relay/TodoAppQuery.graphql";
-import type { PreloadedQuery, EntryPointProps, EntryPointComponent } from "react-relay";
-import TodoList from "./TodoList";
-import * as React from "react";
-import { graphql, usePreloadedQuery } from "react-relay";
+import type {TodoAppQuery} from '../../__generated__/relay/TodoAppQuery.graphql';
+import {graphql, usePreloadedQuery} from 'react-relay';
+import TodoList from './TodoList';
+import * as React from 'react';
+import {SimpleEntryPointProps} from '@loop-payments/react-router-relay';
+
 type PreloadedQueries = {
-  todoAppQueryRef: PreloadedQuery<TodoAppQuery>;
+  todoAppQueryRef: TodoAppQuery;
 };
-type Props = EntryPointProps<PreloadedQueries>;
-export default (function TodoApp({
-  queries
-}: Props): React.ReactNode {
-  const {
-    user
-  } = usePreloadedQuery(graphql`
+type Props = SimpleEntryPointProps<PreloadedQueries>;
+
+function TodoApp({queries}: Props): React.ReactNode {
+  const {user} = usePreloadedQuery<TodoAppQuery>(graphql`
       query TodoAppQuery($userId: String) @preloadable {
         user(id: $userId) @required(action: THROW) {
           ...TodoList_user
         }
       }
     `, queries.todoAppQueryRef);
+
   return <div>
-      <section className="todoapp">
-        <TodoList userRef={user} />
-      </section>
+    <section className="todoapp">
+      <TodoList userRef={user} />
+    </section>
 
-      <footer className="info">
-        <p>Double-click to edit a todo</p>
+    <footer className="info">
+      <p>Double-click to edit a todo</p>
 
-        <p>
-          Created by the{' '}
-          <a href="https://facebook.github.io/relay/">Relay team</a>
-        </p>
+      <p>
+        Created by the{' '}
+        <a href="https://facebook.github.io/relay/">Relay team</a>
+      </p>
 
-        <p>
-          Part of <a href="http://todomvc.com">TodoMVC</a>
-        </p>
-      </footer>
-    </div>;
-} as EntryPointComponent<PreloadedQueries>);
+      <p>
+        Part of <a href="http://todomvc.com">TodoMVC</a>
+      </p>
+    </footer>
+  </div>;
+}
+
+export default TodoApp;
