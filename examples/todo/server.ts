@@ -6,6 +6,7 @@ import path from "path";
 import webpack from "webpack";
 import webpackDevMiddleware from "webpack-dev-middleware";
 import webpackHotMiddleware from "webpack-hot-middleware";
+import ReactRefreshPlugin from "@pmmmwh/react-refresh-webpack-plugin"
 import { schema } from "./data/schema";
 
 const APP_PORT: number = 3000;
@@ -18,7 +19,7 @@ const compiler = webpack({
   entry: [
     'whatwg-fetch',
     'webpack-hot-middleware/client',
-    path.resolve(__dirname, 'src', 'app.tsx'),
+    path.resolve(__dirname, 'src', 'App.tsx'),
     path.resolve(__dirname, 'src', 'components', 'TodoApp.tsx')
   ],
   module: {
@@ -34,10 +35,11 @@ const compiler = webpack({
     extensions: ['.tsx', '.ts', '.js']
   },
   output: {
-    filename: 'app.js'
+    filename: 'App.js'
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    new ReactRefreshPlugin()
   ],
   stats: {
     colors: true
