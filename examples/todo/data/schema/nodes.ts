@@ -1,9 +1,8 @@
-/* eslint flowtype/require-return-type: 'off' */
 import type { GraphQLInterfaceType, GraphQLFieldConfig, GraphQLFieldConfigArgumentMap } from "graphql";
 import { GraphQLBoolean, GraphQLInt, GraphQLNonNull, GraphQLObjectType, GraphQLString } from "graphql";
 import { connectionArgs, connectionDefinitions, connectionFromArray, fromGlobalId, globalIdField, nodeDefinitions } from "graphql-relay";
 import { Todo, User, USER_ID, getTodoOrThrow, getTodos, getUserOrThrow } from "../database";
-// @ts-expect-error graphql-relay types not available in flow-typed, strengthen this typing
+
 const {
   nodeInterface,
   nodeField
@@ -23,19 +22,18 @@ const {
   }
 
   return null;
-}, (obj: {}): GraphQLObjectType | null | undefined => {
+}, (obj: {}): string | undefined => {
   if (obj instanceof Todo) {
-    return GraphQLTodo;
+    return GraphQLTodo.name;
   } else if (obj instanceof User) {
-    return GraphQLUser;
+    return GraphQLUser.name;
   }
-
-  return null;
 }) as {
   nodeField: GraphQLFieldConfig<any, any>;
   nodeInterface: GraphQLInterfaceType;
   nodesField: GraphQLFieldConfig<any, any>;
 });
+
 const GraphQLTodo: GraphQLObjectType = new GraphQLObjectType({
   name: 'Todo',
   fields: {
@@ -51,6 +49,7 @@ const GraphQLTodo: GraphQLObjectType = new GraphQLObjectType({
   },
   interfaces: [nodeInterface]
 });
+
 const {
   connectionType: TodosConnection,
   edgeType: GraphQLTodoEdge
@@ -61,7 +60,7 @@ const {
   connectionType: GraphQLObjectType;
   edgeType: GraphQLObjectType;
 });
-// @ts-expect-error[cannot-spread-indexer]
+
 const todosArgs: GraphQLFieldConfigArgumentMap = {
   status: {
     type: GraphQLString,
@@ -69,6 +68,7 @@ const todosArgs: GraphQLFieldConfigArgumentMap = {
   },
   ...connectionArgs
 };
+
 const GraphQLUser: GraphQLObjectType = new GraphQLObjectType({
   name: 'User',
   fields: {
@@ -105,4 +105,5 @@ const GraphQLUser: GraphQLObjectType = new GraphQLObjectType({
   },
   interfaces: [nodeInterface]
 });
+
 export { nodeField, GraphQLTodo, GraphQLTodoEdge, GraphQLUser };

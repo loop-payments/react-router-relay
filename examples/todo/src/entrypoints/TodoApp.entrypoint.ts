@@ -3,11 +3,6 @@ import {JSResource, SimpleEntryPoint} from '@loop-payments/react-router-relay';
 
 type TodoApp = typeof import('../components/TodoApp').default;
 
-// TODO: How to type the params?
-// type Params = {
-//   userId: string;
-// };
-
 const TodoAppEntryPoint: SimpleEntryPoint<TodoApp> = {
   getPreloadProps({params}) {
     return {

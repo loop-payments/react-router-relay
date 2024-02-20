@@ -1,5 +1,5 @@
 import { GraphQLObjectType, GraphQLSchema } from "graphql";
-import { nodeField } from "./nodes";
+import {GraphQLTodo, GraphQLUser, nodeField} from './nodes';
 import { UserQuery } from "./queries/UserQuery";
 import { AddTodoMutation } from "./mutations/AddTodoMutation";
 import { ChangeTodoStatusMutation } from "./mutations/ChangeTodoStatusMutation";
@@ -27,5 +27,6 @@ const Mutation = new GraphQLObjectType({
 });
 export const schema = new GraphQLSchema({
   query: Query,
-  mutation: Mutation
+  mutation: Mutation,
+  types: [GraphQLUser, GraphQLTodo]
 });
