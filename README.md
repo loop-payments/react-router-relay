@@ -135,3 +135,7 @@ This package includes a wrapper around `react-router-dom`'s `Link` component. Us
 ## A note on JSResource
 
 Loading data for entrypoints depends on having a JSResource implementation to coordinate and cache loads of the same resource. This package does not depend on using the internal JSResource implementation if you wish to use a different one in your entrypoints.
+
+## Example
+
+For an example take a look at [examples/todo](./examples/todo).
