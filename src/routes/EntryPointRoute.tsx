@@ -15,11 +15,13 @@ import { InternalPreload } from "./internal-preload-symbol";
 
 const preloadsToDispose = new Set();
 
+type InternalPreloadProperties = {
+  entryPoint: () => Promise<SimpleEntryPoint<BaseEntryPointComponent, any>>;
+  resource: () => Promise<unknown>;
+};
+
 export type PreloadableComponent = ComponentType & {
-  [InternalPreload]?: {
-    entryPoint: () => Promise<SimpleEntryPoint<BaseEntryPointComponent, any>>;
-    resource: () => Promise<unknown>;
-  };
+  [InternalPreload]?: InternalPreloadProperties;
 };
 
 export default function EntryPointRoute(
@@ -84,7 +86,7 @@ export default function EntryPointRoute(
   // This would be much better if it injected a modulepreload link. Unfortunately
   // we don't have a mechanism for getting the right bundle file name to put into
   // the href. We might be able to do it by building a rollup plugin.
-  Hoc[InternalPreload] = {
+  const internalPreloadProperties: InternalPreloadProperties = {
     async entryPoint() {
       return "load" in entryPoint ? entryPoint.load() : entryPoint;
     },
@@ -93,6 +95,7 @@ export default function EntryPointRoute(
       return entryPoint.root.load();
     },
   };
+  Hoc[InternalPreload] = internalPreloadProperties;
 
   return Hoc;
 }
