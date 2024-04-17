@@ -91,17 +91,13 @@ export function createEntryPointRoute<
   // to reload the query.
   // See https://github.com/loop-payments/react-router-relay/issues/15.
   function shouldRevalidate(args: ShouldRevalidateFunctionArgs): boolean {
-    function hasDisposedQuery() {
-      for (let key in queries) {
-        const query = queries[key]
-        if (query.isDisposed) {
-          return true;
-        }
+    for (let key in queries) {
+      const query = queries[key]
+      if (query.isDisposed) {
+        return true;
       }
-      return false;
     }
-    const defaultShouldRevalidate = args.defaultShouldRevalidate || hasDisposedQuery();
-    return rest.shouldRevalidate?.({ ...args, defaultShouldRevalidate }) ?? defaultShouldRevalidate;
+    return rest.shouldRevalidate?.(args) ?? args.defaultShouldRevalidate;
   }
 
   return {
