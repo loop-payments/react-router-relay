@@ -31,6 +31,7 @@ export function preparePreloadableRoutes<PreloaderContext>(
         ...rest,
         ...createEntryPointRoute(
           entryPoint,
+          rest,
           environmentProvider,
           preloaderContextProvider,
         ),

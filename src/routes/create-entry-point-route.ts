@@ -2,12 +2,13 @@ import {
   type IEnvironmentProvider,
   loadQuery,
   JSResourceReference,
-  PreloadOptions,
+  PreloadedQuery,
   GraphQLTaggedNode,
   PreloadableConcreteRequest,
+  PreloadOptions,
   EnvironmentProviderOptions,
-} from "react-relay";
-import type { LoaderFunction, LoaderFunctionArgs } from "react-router-dom";
+} from 'react-relay';
+import type { LoaderFunction, LoaderFunctionArgs, ShouldRevalidateFunction, ShouldRevalidateFunctionArgs } from "react-router-dom";
 import type { ComponentType } from "react";
 
 import type {
@@ -16,9 +17,12 @@ import type {
   SimpleEntryPoint,
 } from "./entry-point.types";
 import EntryPointRoute from "./EntryPointRoute";
+import type {EntryPointRouteObject} from './entry-point-route-object.types';
+import {OperationType} from 'relay-runtime';
 
 type EntryPointRouteProperties = {
   loader: LoaderFunction;
+  shouldRevalidate: ShouldRevalidateFunction;
   Component: ComponentType<Record<string, never>>;
 };
 
@@ -29,9 +33,12 @@ export function createEntryPointRoute<
   entryPoint:
     | SimpleEntryPoint<Component, PreloaderContext>
     | JSResourceReference<SimpleEntryPoint<Component, PreloaderContext>>,
+  rest: Omit<EntryPointRouteObject, 'entryPoint'>,
   environmentProvider: IEnvironmentProvider<never>,
-  contextProvider?: PreloaderContextProvider<PreloaderContext>
+  contextProvider?: PreloaderContextProvider<PreloaderContext>,
 ): EntryPointRouteProperties {
+  let queries: {[p: string]: PreloadedQuery<OperationType, any>} | undefined = undefined;
+
   async function loader(args: LoaderFunctionArgs): Promise<any> {
     const loadedEntryPoint =
       "load" in entryPoint ? await entryPoint.load() : entryPoint;
@@ -39,7 +46,6 @@ export function createEntryPointRoute<
       ...args,
       preloaderContext: contextProvider?.getPreloaderContext() as any,
     });
-    let queries = undefined;
     if (queryArgs) {
       queries = Object.fromEntries(
         Object.entries(queryArgs).map(
@@ -80,8 +86,23 @@ export function createEntryPointRoute<
     };
   }
 
+  // This is needed to avoid cases where the query has been disposed of but the
+  // router would not normally revalidate and rerun the loader which is needed
+  // to reload the query.
+  // See https://github.com/loop-payments/react-router-relay/issues/15.
+  function shouldRevalidate(args: ShouldRevalidateFunctionArgs): boolean {
+    for (let key in queries) {
+      const query = queries[key]
+      if (query.isDisposed) {
+        return true;
+      }
+    }
+    return rest.shouldRevalidate?.(args) ?? args.defaultShouldRevalidate;
+  }
+
   return {
     loader,
+    shouldRevalidate,
     Component: EntryPointRoute(entryPoint),
   };
 }
