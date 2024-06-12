@@ -40,11 +40,14 @@ export function preparePreloadableRoutes<PreloaderContext>(
     }
 
     if (newRoute.children) {
-      newRoute.children = preparePreloadableRoutes(
-        newRoute.children,
-        environmentProvider,
-        preloaderContextProvider,
-      );
+      return {
+        ...newRoute,
+        children: preparePreloadableRoutes(
+          newRoute.children,
+          environmentProvider,
+          preloaderContextProvider,
+        ),
+      }
     }
 
     return newRoute;
