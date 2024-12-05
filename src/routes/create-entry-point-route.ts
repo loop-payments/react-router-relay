@@ -4,9 +4,9 @@ import {
   JSResourceReference,
   PreloadOptions,
   GraphQLTaggedNode,
-  PreloadableConcreteRequest,
   EnvironmentProviderOptions,
 } from "react-relay";
+import type { PreloadableConcreteRequest } from "relay-runtime";
 import type { LoaderFunction, LoaderFunctionArgs } from "react-router-dom";
 import type { ComponentType } from "react";
 
@@ -30,7 +30,7 @@ export function createEntryPointRoute<
     | SimpleEntryPoint<Component, PreloaderContext>
     | JSResourceReference<SimpleEntryPoint<Component, PreloaderContext>>,
   environmentProvider: IEnvironmentProvider<never>,
-  contextProvider?: PreloaderContextProvider<PreloaderContext>
+  contextProvider?: PreloaderContextProvider<PreloaderContext>,
 ): EntryPointRouteProperties {
   async function loader(args: LoaderFunctionArgs): Promise<any> {
     const loadedEntryPoint =
@@ -67,10 +67,10 @@ export function createEntryPointRoute<
               parameters,
               variables,
               options ?? undefined,
-              environmentProviderOptions ?? undefined
+              environmentProviderOptions ?? undefined,
             ),
-          ]
-        )
+          ],
+        ),
       );
     }
 

@@ -1,11 +1,12 @@
-import { useContext, useCallback, isValidElement, ComponentType } from "react";
 import {
-  type To,
-  UNSAFE_DataRouterContext,
-  matchRoutes,
-} from "react-router-dom";
+  useContext,
+  useCallback,
+  isValidElement,
+  type ComponentType,
+} from "react";
+import { type To, UNSAFE_DataRouterContext, matchRoutes } from "react-router-dom";
 import { InternalPreload } from "./routes/internal-preload-symbol";
-import { PreloadableComponent } from "./routes/EntryPointRoute";
+import type { PreloadableComponent } from "./routes/EntryPointRoute";
 
 /**
  * Returns a handler for triggering entrypoint loading for a target. This is used

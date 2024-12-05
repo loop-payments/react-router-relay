@@ -47,7 +47,7 @@ export function preparePreloadableRoutes<PreloaderContext>(
           environmentProvider,
           preloaderContextProvider,
         ),
-      }
+      };
     }
 
     return newRoute;

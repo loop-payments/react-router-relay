@@ -5,7 +5,7 @@
  * JSResourceReference interface in react-relay.
  */
 
-import { JSResourceReference } from "react-relay";
+import type { JSResourceReference } from "react-relay";
 
 /**
  * A cache of resources to avoid loading the same module twice. This is important

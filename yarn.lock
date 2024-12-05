@@ -5,12 +5,12 @@ __metadata:
   version: 8
   cacheKey: 10
 
-"@babel/runtime@npm:^7.0.0":
-  version: 7.22.6
-  resolution: "@babel/runtime@npm:7.22.6"
+"@babel/runtime@npm:^7.25.0":
+  version: 7.26.0
+  resolution: "@babel/runtime@npm:7.26.0"
   dependencies:
-    regenerator-runtime: "npm:^0.13.11"
-  checksum: 1d2f56797f548b009910bddf3dc04f980a9701193233145dc923f3ea87c8f88121a3c3ef1d449e9cb52a370d7d025a2243c748882d5546ff079ddf5ffe29f240
+    regenerator-runtime: "npm:^0.14.0"
+  checksum: 9f4ea1c1d566c497c052d505587554e782e021e6ccd302c2ad7ae8291c8e16e3f19d4a7726fb64469e057779ea2081c28b7dbefec6d813a22f08a35712c0f699
   languageName: node
   linkType: hard
 
@@ -18,22 +18,22 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@loop-payments/react-router-relay@workspace:."
   dependencies:
-    "@types/react-relay": "npm:^14.1.4"
-    prettier: "npm:^3.0.0"
-    react: "npm:^18.2.0"
-    react-relay: "npm:^15.0.0"
-    react-router-dom: "npm:^6.14.1"
-    typescript: "npm:^5.1.6"
+    "@types/react-relay": "npm:^18.2.0"
+    prettier: "npm:^3.4.2"
+    react: "npm:^19.0.0"
+    react-relay: "npm:^18.2.0"
+    react-router-dom: "npm:^7.0.2"
+    typescript: "npm:^5.7.2"
   peerDependencies:
     react-relay: ">=15.0.0"
     react-router-dom: ">=6.4.0"
   languageName: unknown
   linkType: soft
 
-"@remix-run/router@npm:1.7.1":
-  version: 1.7.1
-  resolution: "@remix-run/router@npm:1.7.1"
-  checksum: c8618cf4f8041af989cbc2990a16417ab59a702bed0e2d0c5a2a257729db6a394457bbcf33781813cd32b169f91b7b38673f038fcdefc3f4a64a2fd75f261661
+"@types/cookie@npm:^0.6.0":
+  version: 0.6.0
+  resolution: "@types/cookie@npm:0.6.0"
+  checksum: b883348d5bf88695fbc2c2276b1c49859267a55cae3cf11ea1dccc1b3be15b466e637ce3242109ba27d616c77c6aa4efe521e3d557110b4fdd9bc332a12445c2
   languageName: node
   linkType: hard
 
@@ -44,13 +44,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-relay@npm:^14.1.4":
-  version: 14.1.4
-  resolution: "@types/react-relay@npm:14.1.4"
+"@types/react-relay@npm:^18.2.0":
+  version: 18.2.0
+  resolution: "@types/react-relay@npm:18.2.0"
   dependencies:
     "@types/react": "npm:*"
     "@types/relay-runtime": "npm:*"
-  checksum: cfb5011e4b21f0f7a6b652e44901389d4e41597d47b6431d7c4368daa73ad56082ed7ad9f0004061a69ef8eef6d5fbd77d0237383235d185ad80553177d8e0af
+  checksum: fb5642274314dd64bf2e02ea680088fc771ade9623339f2935f32e00d36b1a0e0dcd0b0ee6ee9ea115658594ba3bfb6b3cb50aea213d8bc9994fd5bf06fe710d
   languageName: node
   linkType: hard
 
@@ -66,9 +66,9 @@ __metadata:
   linkType: hard
 
 "@types/relay-runtime@npm:*":
-  version: 14.1.11
-  resolution: "@types/relay-runtime@npm:14.1.11"
-  checksum: aa0393a087a6c527434bb46cd43240d74246dfef1778a68f004fc438c00087e8b039e83efe575ffac43eec7814f79e70857368416047bd1fdefa2a4f04974826
+  version: 18.2.1
+  resolution: "@types/relay-runtime@npm:18.2.1"
+  checksum: 69bc739c101c99fb502882411006a168132811da67187ec04556e61e9acf5bb8590040222768b54ababad8c1a6b559441563a667bc058f94aadd6e5558e16014
   languageName: node
   linkType: hard
 
@@ -83,6 +83,13 @@ __metadata:
   version: 2.0.6
   resolution: "asap@npm:2.0.6"
   checksum: b244c0458c571945e4b3be0b14eb001bea5596f9868cc50cc711dc03d58a7e953517d3f0dad81ccde3ff37d1f074701fa76a6f07d41aaa992d7204a37b915dda
+  languageName: node
+  linkType: hard
+
+"cookie@npm:^1.0.1":
+  version: 1.0.2
+  resolution: "cookie@npm:1.0.2"
+  checksum: f5817cdc84d8977761b12549eba29435e675e65c7fef172bc31737788cd8adc83796bf8abe6d950554e7987325ad2d9ac2971c5bd8ff0c4f81c145f82e4ab1be
   languageName: node
   linkType: hard
 
@@ -140,7 +147,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"loose-envify@npm:^1.0.0, loose-envify@npm:^1.1.0":
+"loose-envify@npm:^1.0.0":
   version: 1.4.0
   resolution: "loose-envify@npm:1.4.0"
   dependencies:
@@ -179,12 +186,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "prettier@npm:3.0.0"
+"prettier@npm:^3.4.2":
+  version: 3.4.2
+  resolution: "prettier@npm:3.4.2"
   bin:
     prettier: bin/prettier.cjs
-  checksum: 399292638280988ecd44db6532e908246b7c9468e6f5f571b3835a5206b7f1132cb674c12be430d921474901dc85398429dfd2dc31b282eef9affebd3ce72cef
+  checksum: a3e806fb0b635818964d472d35d27e21a4e17150c679047f5501e1f23bd4aa806adf660f0c0d35214a210d5d440da6896c2e86156da55f221a57938278dc326e
   languageName: node
   linkType: hard
 
@@ -197,69 +204,80 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-relay@npm:^15.0.0":
-  version: 15.0.0
-  resolution: "react-relay@npm:15.0.0"
+"react-relay@npm:^18.2.0":
+  version: 18.2.0
+  resolution: "react-relay@npm:18.2.0"
   dependencies:
-    "@babel/runtime": "npm:^7.0.0"
+    "@babel/runtime": "npm:^7.25.0"
     fbjs: "npm:^3.0.2"
     invariant: "npm:^2.2.4"
     nullthrows: "npm:^1.1.1"
-    relay-runtime: "npm:15.0.0"
+    relay-runtime: "npm:18.2.0"
   peerDependencies:
     react: ^16.9.0 || ^17 || ^18
-  checksum: 3250b12020c9fae5012985b274d9396ab89588eccfe0e52cc73220a67a820ea1927648ca87bd8e6afd2dc7945c8b25fbaad8039914f9dbb591f4393933ce1f35
+  checksum: 9f6c908bb38e4aa03ebfd8597906d38967d120c857fdcd7a4d631a3b260b842026520915fcee81caeac6db5f8361e51481068d3d994e4dc0e3b318eb6fda095c
   languageName: node
   linkType: hard
 
-"react-router-dom@npm:^6.14.1":
-  version: 6.14.1
-  resolution: "react-router-dom@npm:6.14.1"
+"react-router-dom@npm:^7.0.2":
+  version: 7.0.2
+  resolution: "react-router-dom@npm:7.0.2"
   dependencies:
-    "@remix-run/router": "npm:1.7.1"
-    react-router: "npm:6.14.1"
+    react-router: "npm:7.0.2"
   peerDependencies:
-    react: ">=16.8"
-    react-dom: ">=16.8"
-  checksum: 507a455ed7efcb5743e248737d1516d9c3afc79b6741386ef82f8668794f9571149c8b61e988e22fb08ac742a4b5ef35e82b4a500d91b19032d0e7fc5458b396
+    react: ">=18"
+    react-dom: ">=18"
+  checksum: 7b7768c91bc19018278d05b7be2e959c4e47ffadfb81aeaa450efbd0dabc15bb3004e0c938da2a01eb4839c9f8decb5e42b85d81ee85584f47b5cbd4d958c112
   languageName: node
   linkType: hard
 
-"react-router@npm:6.14.1":
-  version: 6.14.1
-  resolution: "react-router@npm:6.14.1"
+"react-router@npm:7.0.2":
+  version: 7.0.2
+  resolution: "react-router@npm:7.0.2"
   dependencies:
-    "@remix-run/router": "npm:1.7.1"
+    "@types/cookie": "npm:^0.6.0"
+    cookie: "npm:^1.0.1"
+    set-cookie-parser: "npm:^2.6.0"
+    turbo-stream: "npm:2.4.0"
   peerDependencies:
-    react: ">=16.8"
-  checksum: fee4eb573df8df13573746869698ea48fd01d78258a7e8aa68bf51154115311507c9dca32d0c72499746164df9438124d07824f93122898516c5175e75d25dda
+    react: ">=18"
+    react-dom: ">=18"
+  peerDependenciesMeta:
+    react-dom:
+      optional: true
+  checksum: f8bf5f7810388d4da81444d5e816135306aadd0340a26d645eb171e2b4c4a6d7f5a810f1d27e25ae0f006b949f7cf66fcf399f2af79f48341752a6651b2b30cb
   languageName: node
   linkType: hard
 
-"react@npm:^18.2.0":
+"react@npm:^19.0.0":
+  version: 19.0.0
+  resolution: "react@npm:19.0.0"
+  checksum: 2490969c503f644703c88990d20e4011fa6119ddeca451e9de48f6d7ab058d670d2852a5fcd3aa3cd90a923ab2815d532637bd4a814add402ae5c0d4f129ee71
+  languageName: node
+  linkType: hard
+
+"regenerator-runtime@npm:^0.14.0":
+  version: 0.14.1
+  resolution: "regenerator-runtime@npm:0.14.1"
+  checksum: 5db3161abb311eef8c45bcf6565f4f378f785900ed3945acf740a9888c792f75b98ecb77f0775f3bf95502ff423529d23e94f41d80c8256e8fa05ed4b07cf471
+  languageName: node
+  linkType: hard
+
+"relay-runtime@npm:18.2.0":
   version: 18.2.0
-  resolution: "react@npm:18.2.0"
+  resolution: "relay-runtime@npm:18.2.0"
   dependencies:
-    loose-envify: "npm:^1.1.0"
-  checksum: b9214a9bd79e99d08de55f8bef2b7fc8c39630be97c4e29d7be173d14a9a10670b5325e94485f74cd8bff4966ef3c78ee53c79a7b0b9b70cba20aa8973acc694
-  languageName: node
-  linkType: hard
-
-"regenerator-runtime@npm:^0.13.11":
-  version: 0.13.11
-  resolution: "regenerator-runtime@npm:0.13.11"
-  checksum: d493e9e118abef5b099c78170834f18540c4933cedf9bfabc32d3af94abfb59a7907bd7950259cbab0a929ebca7db77301e8024e5121e6482a82f78283dfd20c
-  languageName: node
-  linkType: hard
-
-"relay-runtime@npm:15.0.0":
-  version: 15.0.0
-  resolution: "relay-runtime@npm:15.0.0"
-  dependencies:
-    "@babel/runtime": "npm:^7.0.0"
+    "@babel/runtime": "npm:^7.25.0"
     fbjs: "npm:^3.0.2"
     invariant: "npm:^2.2.4"
-  checksum: ee83ff9f76349de0e131fba824275f2d0e860c8c12561be51dd77acf7cd7bff8247a5d74ce71a304e37d65f4bf2d12879b7571ecaddc514a5865d384cc37fd8a
+  checksum: cfa7d4af0a13526c89c39f6b392647d33ce38435a9d5de95ca89e8ccf01612e682bca5defb1767f7ffc8896811e2acb90e2c73e577498efa37a7b050f31dcf64
+  languageName: node
+  linkType: hard
+
+"set-cookie-parser@npm:^2.6.0":
+  version: 2.7.1
+  resolution: "set-cookie-parser@npm:2.7.1"
+  checksum: c92b1130032693342bca13ea1b1bc93967ab37deec4387fcd8c2a843c0ef2fd9a9f3df25aea5bb3976cd05a91c2cf4632dd6164d6e1814208fb7d7e14edd42b4
   languageName: node
   linkType: hard
 
@@ -277,23 +295,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^5.1.6":
-  version: 5.1.6
-  resolution: "typescript@npm:5.1.6"
-  bin:
-    tsc: bin/tsc
-    tsserver: bin/tsserver
-  checksum: f347cde665cf43dc4c1c7d9821c7d9bbec3c3914f4bdd82ee490e9fb9f6d99036ed8666463b6a192dd005eeef333c5087d5931bdd51ec853436ff9a670a7417e
+"turbo-stream@npm:2.4.0":
+  version: 2.4.0
+  resolution: "turbo-stream@npm:2.4.0"
+  checksum: 7079bbc82b58340f783144cd669cc7e598288523103a8d68bb8a4c6bb28c64eccb71d389b33aab07788d3a9030638b795709e15cb8486f722b1cdac59cb58afc
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A^5.1.6#optional!builtin<compat/typescript>":
-  version: 5.1.6
-  resolution: "typescript@patch:typescript@npm%3A5.1.6#optional!builtin<compat/typescript>::version=5.1.6&hash=5da071"
+"typescript@npm:^5.7.2":
+  version: 5.7.2
+  resolution: "typescript@npm:5.7.2"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: f5481fa3ba0eee8970f46708d13c05650a865ad093b586fc9573f425c64c57ca97e3308e110bb528deb3ccebe83f6fd7b5a8ac90018038da96326a9ccdf8e77c
+  checksum: 4caa3904df69db9d4a8bedc31bafc1e19ffb7b24fbde2997a1633ae1398d0de5bdbf8daf602ccf3b23faddf1aeeb9b795223a2ed9c9a4fdcaf07bfde114a401a
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@npm%3A^5.7.2#optional!builtin<compat/typescript>":
+  version: 5.7.2
+  resolution: "typescript@patch:typescript@npm%3A5.7.2#optional!builtin<compat/typescript>::version=5.7.2&hash=e012d7"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: ff27fc124bceb8969be722baa38af945b2505767cf794de3e2715e58f61b43780284060287d651fcbbdfb6f917f4653b20f4751991f17e0706db389b9bb3f75d
   languageName: node
   linkType: hard
 
