@@ -1,4 +1,8 @@
-import type { EntryPoint, EntryPointComponent, EntryPointProps } from "react-relay";
+import type {
+  EntryPoint,
+  EntryPointComponent,
+  EntryPointProps,
+} from "react-relay";
 import type { LoaderFunctionArgs, Params } from "react-router";
 import type { OperationType } from "relay-runtime";
 

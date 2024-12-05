@@ -1,9 +1,10 @@
-import { useContext, useCallback, isValidElement, type ComponentType } from "react";
 import {
-  type To,
-  UNSAFE_DataRouterContext,
-  matchRoutes,
-} from "react-router";
+  useContext,
+  useCallback,
+  isValidElement,
+  type ComponentType,
+} from "react";
+import { type To, UNSAFE_DataRouterContext, matchRoutes } from "react-router";
 import { InternalPreload } from "./routes/internal-preload-symbol";
 import type { PreloadableComponent } from "./routes/EntryPointRoute";
 

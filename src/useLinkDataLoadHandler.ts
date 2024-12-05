@@ -29,7 +29,7 @@ export function useLinkDataLoadHandler(to: To): () => void {
     const request = new Request(url);
     for (const match of matches) {
       const { loader } = match.route;
-      if (typeof loader !== 'function') {
+      if (typeof loader !== "function") {
         return;
       }
 

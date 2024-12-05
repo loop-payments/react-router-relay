@@ -41,14 +41,14 @@ export default function Link({
       fetchResources();
       onMouseEnter?.(e);
     },
-    [onMouseEnter, fetchResources]
+    [onMouseEnter, fetchResources],
   );
   const handleFocus = useCallback(
     (e: FocusEvent<HTMLAnchorElement>) => {
       fetchResources();
       onFocus?.(e);
     },
-    [onFocus, fetchResources]
+    [onFocus, fetchResources],
   );
   const handleMouseDown = useCallback(
     (e: MouseEvent<HTMLAnchorElement>) => {
@@ -56,7 +56,7 @@ export default function Link({
       fetchData();
       onMouseDown?.(e);
     },
-    [onMouseDown, fetchResources, fetchData]
+    [onMouseDown, fetchResources, fetchData],
   );
 
   return (
