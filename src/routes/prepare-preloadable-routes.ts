@@ -1,5 +1,5 @@
 import type { IEnvironmentProvider } from "react-relay";
-import type { RouteObject } from "react-router-dom";
+import type { RouteObject } from "react-router";
 
 import type { PreloaderContextProvider } from "./entry-point.types";
 import { createEntryPointRoute } from "./create-entry-point-route";

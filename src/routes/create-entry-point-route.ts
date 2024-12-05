@@ -7,7 +7,7 @@ import {
   EnvironmentProviderOptions,
 } from "react-relay";
 import type {PreloadableConcreteRequest} from 'relay-runtime';
-import type { LoaderFunction, LoaderFunctionArgs } from "react-router-dom";
+import type { LoaderFunction, LoaderFunctionArgs } from "react-router";
 import type { ComponentType } from "react";
 
 import type {

@@ -22,7 +22,7 @@ __metadata:
     prettier: "npm:^3.4.2"
     react: "npm:^19.0.0"
     react-relay: "npm:^18.2.0"
-    react-router-dom: "npm:^7.0.2"
+    react-router: "npm:^7.0.2"
     typescript: "npm:^5.7.2"
   peerDependencies:
     react-relay: ">=15.0.0"
@@ -219,19 +219,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-router-dom@npm:^7.0.2":
-  version: 7.0.2
-  resolution: "react-router-dom@npm:7.0.2"
-  dependencies:
-    react-router: "npm:7.0.2"
-  peerDependencies:
-    react: ">=18"
-    react-dom: ">=18"
-  checksum: 7b7768c91bc19018278d05b7be2e959c4e47ffadfb81aeaa450efbd0dabc15bb3004e0c938da2a01eb4839c9f8decb5e42b85d81ee85584f47b5cbd4d958c112
-  languageName: node
-  linkType: hard
-
-"react-router@npm:7.0.2":
+"react-router@npm:^7.0.2":
   version: 7.0.2
   resolution: "react-router@npm:7.0.2"
   dependencies:

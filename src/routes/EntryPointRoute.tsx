@@ -4,7 +4,7 @@ import type {
   EntryPointProps,
   JSResourceReference,
 } from "react-relay";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData } from "react-router";
 import type { OperationType } from "relay-runtime";
 
 import type {
@@ -25,7 +25,7 @@ export type PreloadableComponent = ComponentType & {
 export default function EntryPointRoute(
   entryPoint:
     | SimpleEntryPoint<BaseEntryPointComponent, any>
-    | JSResourceReference<SimpleEntryPoint<BaseEntryPointComponent, any>>,
+    | JSResourceReference<SimpleEntryPoint<BaseEntryPointComponent, any>>
 ): ComponentType {
   const Hoc: PreloadableComponent = () => {
     const data = useLoaderData() as EntryPointProps<

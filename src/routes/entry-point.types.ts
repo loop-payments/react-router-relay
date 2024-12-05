@@ -1,6 +1,6 @@
-import { EntryPoint, EntryPointComponent, EntryPointProps } from "react-relay";
-import { LoaderFunctionArgs, Params } from "react-router-dom";
-import { OperationType } from "relay-runtime";
+import type { EntryPoint, EntryPointComponent, EntryPointProps } from "react-relay";
+import type { LoaderFunctionArgs, Params } from "react-router";
+import type { OperationType } from "relay-runtime";
 
 export type BaseEntryPointComponent = EntryPointComponent<
   Record<string, OperationType>,

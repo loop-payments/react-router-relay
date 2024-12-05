@@ -3,7 +3,7 @@ import type {
   IndexRouteObject,
   NonIndexRouteObject,
   RouteObject,
-} from "react-router-dom";
+} from "react-router";
 import type { EntryPointParams } from "./entry-point.types";
 
 type BadEntryPointType = {

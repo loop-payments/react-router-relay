@@ -4,7 +4,7 @@ import {
   useCallback,
   useEffect,
 } from "react";
-import { Link as RouterLink, type LinkProps } from "react-router-dom";
+import { Link as RouterLink, type LinkProps } from "react-router";
 import { useLinkResourceLoadHandler } from "./useLinkResourceLoadHandler";
 import { useLinkDataLoadHandler } from "./useLinkDataLoadHandler";
 import { useLinkEntryPointLoadHandler } from "./useLinkEntryPointLoadHandler";
@@ -27,7 +27,7 @@ export default function Link({
   const fetchData = useLinkDataLoadHandler(props.to);
 
   useEffect(() => {
-    if ('requestIdleCallback' in window) {
+    if ("requestIdleCallback" in window) {
       const id = requestIdleCallback(fetchEntryPoint);
       return () => cancelIdleCallback(id);
     } else {
@@ -41,14 +41,14 @@ export default function Link({
       fetchResources();
       onMouseEnter?.(e);
     },
-    [onMouseEnter, fetchResources],
+    [onMouseEnter, fetchResources]
   );
   const handleFocus = useCallback(
     (e: FocusEvent<HTMLAnchorElement>) => {
       fetchResources();
       onFocus?.(e);
     },
-    [onFocus, fetchResources],
+    [onFocus, fetchResources]
   );
   const handleMouseDown = useCallback(
     (e: MouseEvent<HTMLAnchorElement>) => {
@@ -56,7 +56,7 @@ export default function Link({
       fetchData();
       onMouseDown?.(e);
     },
-    [onMouseDown, fetchResources, fetchData],
+    [onMouseDown, fetchResources, fetchData]
   );
 
   return (

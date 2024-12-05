@@ -4,7 +4,7 @@ import {
   UNSAFE_DataRouterContext,
   matchRoutes,
   useResolvedPath,
-} from "react-router-dom";
+} from "react-router";
 
 /**
  * Returns a handler for triggering data loading for a target. This is used

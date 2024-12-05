@@ -1,11 +1,12 @@
 {
   "name": "@loop-payments/react-router-relay",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "Relay integration for react-router",
   "main": "dist/index.js",
   "files": [
     "dist"
   ],
+  "type": "module",
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "tsc -p build.tsconfig.json"
@@ -17,7 +18,7 @@
     "prettier": "^3.4.2",
     "react": "^19.0.0",
     "react-relay": "^18.2.0",
-    "react-router-dom": "^7.0.2",
+    "react-router": "^7.0.2",
     "typescript": "^5.7.2"
   },
   "repository": {
@@ -35,7 +36,7 @@
   "homepage": "https://github.com/loop-payments/react-router-relay#readme",
   "peerDependencies": {
     "react-relay": ">=15.0.0",
-    "react-router-dom": ">=6.4.0"
+    "react-router": ">=7.0.0"
   },
   "packageManager": "yarn@4.0.2"
 }
