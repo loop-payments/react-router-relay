@@ -4,9 +4,9 @@ import {
   JSResourceReference,
   PreloadOptions,
   GraphQLTaggedNode,
-  PreloadableConcreteRequest,
   EnvironmentProviderOptions,
 } from "react-relay";
+import type {PreloadableConcreteRequest} from 'relay-runtime';
 import type { LoaderFunction, LoaderFunctionArgs } from "react-router-dom";
 import type { ComponentType } from "react";
 
