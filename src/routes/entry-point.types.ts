@@ -3,7 +3,7 @@ import type {
   EntryPointComponent,
   EntryPointProps,
 } from "react-relay";
-import type { LoaderFunctionArgs, Params } from "react-router";
+import type { LoaderFunctionArgs, Params } from "react-router-dom";
 import type { OperationType } from "relay-runtime";
 
 export type BaseEntryPointComponent = EntryPointComponent<

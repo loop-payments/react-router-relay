@@ -4,7 +4,7 @@ import {
   useCallback,
   useEffect,
 } from "react";
-import { Link as RouterLink, type LinkProps } from "react-router";
+import { Link as RouterLink, type LinkProps } from "react-router-dom";
 import { useLinkResourceLoadHandler } from "./useLinkResourceLoadHandler";
 import { useLinkDataLoadHandler } from "./useLinkDataLoadHandler";
 import { useLinkEntryPointLoadHandler } from "./useLinkEntryPointLoadHandler";

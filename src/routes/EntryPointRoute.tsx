@@ -4,7 +4,7 @@ import type {
   EntryPointProps,
   JSResourceReference,
 } from "react-relay";
-import { useLoaderData } from "react-router";
+import { useLoaderData } from "react-router-dom";
 import type { OperationType } from "relay-runtime";
 
 import type {
