@@ -20,6 +20,7 @@ import EntryPointRoute from "./EntryPointRoute";
 type EntryPointRouteProperties = {
   loader: LoaderFunction;
   Component: ComponentType<Record<string, never>>;
+  handle?: unknown;
 };
 
 export function createEntryPointRoute<
@@ -30,7 +31,7 @@ export function createEntryPointRoute<
     | SimpleEntryPoint<Component, PreloaderContext>
     | JSResourceReference<SimpleEntryPoint<Component, PreloaderContext>>,
   environmentProvider: IEnvironmentProvider<never>,
-  contextProvider?: PreloaderContextProvider<PreloaderContext>,
+  contextProvider?: PreloaderContextProvider<PreloaderContext>
 ): EntryPointRouteProperties {
   async function loader(args: LoaderFunctionArgs): Promise<any> {
     const loadedEntryPoint =
@@ -67,10 +68,10 @@ export function createEntryPointRoute<
               parameters,
               variables,
               options ?? undefined,
-              environmentProviderOptions ?? undefined,
+              environmentProviderOptions ?? undefined
             ),
-          ],
-        ),
+          ]
+        )
       );
     }
 
@@ -83,5 +84,7 @@ export function createEntryPointRoute<
   return {
     loader,
     Component: EntryPointRoute(entryPoint),
+    // Entrypoints that are JSResourceReferences cannot have a handle.
+    handle: "load" in entryPoint ? undefined : entryPoint.handle,
   };
 }

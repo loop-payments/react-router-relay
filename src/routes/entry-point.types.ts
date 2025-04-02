@@ -17,10 +17,14 @@ export interface EntryPointParams<PreloaderContext> extends LoaderFunctionArgs {
   preloaderContext: PreloaderContext;
 }
 
-export type SimpleEntryPoint<
+export interface SimpleEntryPoint<
   Component = BaseEntryPointComponent,
   PreloaderContext = undefined,
-> = EntryPoint<Component, EntryPointParams<PreloaderContext>>;
+> extends EntryPoint<Component, EntryPointParams<PreloaderContext>> {
+  // If you define a handle on your entrypoint we will propagate it to the
+  // corresponding route.
+  handle?: unknown;
+}
 
 export type SimpleEntryPointProps<
   Queries extends Record<string, OperationType>,

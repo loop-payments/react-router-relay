@@ -9,6 +9,8 @@ import type { EntryPointParams } from "./entry-point.types";
 type BadEntryPointType = {
   readonly root: JSResourceReference<EntryPointComponent<any, any, any, any>>;
   readonly getPreloadProps: (entryPointParams: EntryPointParams<any>) => any;
+  // Handle will be propagated to the route if the entrypoint is referenced directly.
+  readonly handle?: unknown;
 };
 
 export interface EntryPointIndexRouteObject
