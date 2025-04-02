@@ -22,41 +22,41 @@ export default function Link({
   onMouseDown,
   ...props
 }: Props) {
-  const fetchEntryPoint = useLinkEntryPointLoadHandler(props.to);
-  const fetchResources = useLinkResourceLoadHandler(props.to);
+  const fetchEntryPoint = useLinkEntryPointLoadHandler();
+  const fetchResources = useLinkResourceLoadHandler();
   const fetchData = useLinkDataLoadHandler(props.to);
 
   useEffect(() => {
     if ("requestIdleCallback" in window) {
-      const id = requestIdleCallback(fetchEntryPoint);
+      const id = requestIdleCallback(() => fetchEntryPoint(props.to));
       return () => cancelIdleCallback(id);
     } else {
-      const id = requestAnimationFrame(fetchEntryPoint);
+      const id = requestAnimationFrame(() => fetchEntryPoint(props.to));
       return () => cancelAnimationFrame(id);
     }
-  }, [fetchEntryPoint]);
+  }, [fetchEntryPoint, props.to]);
 
   const handleMouseEnter = useCallback(
     (e: MouseEvent<HTMLAnchorElement>) => {
-      fetchResources();
+      fetchResources(props.to);
       onMouseEnter?.(e);
     },
-    [onMouseEnter, fetchResources],
+    [onMouseEnter, fetchResources, props.to]
   );
   const handleFocus = useCallback(
     (e: FocusEvent<HTMLAnchorElement>) => {
-      fetchResources();
+      fetchResources(props.to);
       onFocus?.(e);
     },
-    [onFocus, fetchResources],
+    [onFocus, fetchResources, props.to]
   );
   const handleMouseDown = useCallback(
     (e: MouseEvent<HTMLAnchorElement>) => {
-      fetchResources();
+      fetchResources(props.to);
       fetchData();
       onMouseDown?.(e);
     },
-    [onMouseDown, fetchResources, fetchData],
+    [onMouseDown, fetchResources, fetchData, props.to]
   );
 
   return (
