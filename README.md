@@ -45,7 +45,7 @@ import MyPageQueryParameters from "./__generated__/MyPageQuery$parameters";
 
 const entryPoint: SimpleEntryPoint<typeof MyPage> = {
   root: JSResource("MyPage", () => import("./MyPage")),
-  getPreloadedProps({ params }) {
+  getPreloadProps({ params }) {
     return {
       queries: {
         query: {
@@ -71,7 +71,7 @@ import MyPageQuery from "./__generated__/MyPageQuery.graphql";
 
 const entryPoint: SimpleEntryPoint<typeof MyPage> = {
   root: JSResource("MyPage", () => import("./MyPage")),
-  getPreloadedProps({ params }) {
+  getPreloadProps({ params }) {
     return {
       queries: {
         query: {
