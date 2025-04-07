@@ -81,10 +81,14 @@ export function createEntryPointRoute<
     };
   }
 
+  // Entrypoints that are JSResourceReferences cannot have a handle.
+  const handle = "load" in entryPoint ? undefined : entryPoint.handle;
+
   return {
     loader,
     Component: EntryPointRoute(entryPoint),
-    // Entrypoints that are JSResourceReferences cannot have a handle.
-    handle: "load" in entryPoint ? undefined : entryPoint.handle,
+    // Only add the handle if it's defined. This makes spreading the object
+    // easier.
+    ...(handle !== undefined ? { handle } : {}),
   };
 }
