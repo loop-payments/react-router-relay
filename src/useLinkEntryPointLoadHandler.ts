@@ -9,8 +9,8 @@ import {
   UNSAFE_DataRouterContext,
   matchRoutes,
 } from "react-router-dom";
-import { InternalPreload } from "./routes/internal-preload-symbol";
-import type { PreloadableComponent } from "./routes/EntryPointRoute";
+import { InternalPreload } from "./routes/internal-preload-symbol.ts";
+import type { PreloadableComponent } from "./routes/EntryPointRoute.ts";
 
 /**
  * Returns a handler for triggering entrypoint loading for a target. This is used
@@ -21,7 +21,7 @@ export function useLinkEntryPointLoadHandler(): (to: To) => void;
 /** @deprecated move the `to` argument to the callback */
 export function useLinkEntryPointLoadHandler(to: To): () => void;
 export function useLinkEntryPointLoadHandler(
-  deprecatedTo?: To
+  deprecatedTo?: To,
 ): (to?: To) => void {
   const routes = useContext(UNSAFE_DataRouterContext)?.router.routes ?? [];
 
@@ -63,9 +63,9 @@ export function useLinkEntryPointLoadHandler(
                     `[react-router-relay] failed to preload ${
                       match.pathname
                     } entrypoint for route ${JSON.stringify(to)}`,
-                    e
+                    e,
                   );
-                }
+                },
               );
             }
           } catch (e: unknown) {
@@ -73,13 +73,13 @@ export function useLinkEntryPointLoadHandler(
               `[react-router-relay] failed to call entrypoint preloader ${
                 match.pathname
               } for route ${JSON.stringify(to)}`,
-              e
+              e,
             );
           }
         }
       }
     },
-    [routes, deprecatedTo]
+    [routes, deprecatedTo],
   );
 
   return fetchEntrypoint;

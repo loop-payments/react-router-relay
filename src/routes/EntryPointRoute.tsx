@@ -10,8 +10,8 @@ import type { OperationType } from "relay-runtime";
 import type {
   BaseEntryPointComponent,
   SimpleEntryPoint,
-} from "./entry-point.types";
-import { InternalPreload } from "./internal-preload-symbol";
+} from "./entry-point.types.ts";
+import { InternalPreload } from "./internal-preload-symbol.ts";
 
 const preloadsToDispose = new Set();
 

@@ -1,13 +1,13 @@
 import type { IEnvironmentProvider } from "react-relay";
 import type { RouteObject } from "react-router-dom";
 
-import type { PreloaderContextProvider } from "./entry-point.types";
-import { createEntryPointRoute } from "./create-entry-point-route";
+import type { PreloaderContextProvider } from "./entry-point.types.ts";
+import { createEntryPointRoute } from "./create-entry-point-route.ts";
 import type {
   EntryPointIndexRouteObject,
   EntryPointNonIndexRouteObject,
   EntryPointRouteObject,
-} from "./entry-point-route-object.types";
+} from "./entry-point-route-object.types.ts";
 
 /**
  * Prepare a set of routes that that use entry points for use in react-router.
