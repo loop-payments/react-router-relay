@@ -4,7 +4,7 @@ import type {
   NonIndexRouteObject,
   RouteObject,
 } from "react-router-dom";
-import type { EntryPointParams } from "./entry-point.types";
+import type { EntryPointParams } from "./entry-point.types.ts";
 
 type BadEntryPointType = {
   readonly root: JSResourceReference<EntryPointComponent<any, any, any, any>>;
