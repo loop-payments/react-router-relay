@@ -5,9 +5,9 @@ import {
   useEffect,
 } from "react";
 import { Link as RouterLink, type LinkProps } from "react-router-dom";
-import { useLinkResourceLoadHandler } from "./useLinkResourceLoadHandler";
-import { useLinkDataLoadHandler } from "./useLinkDataLoadHandler";
-import { useLinkEntryPointLoadHandler } from "./useLinkEntryPointLoadHandler";
+import { useLinkResourceLoadHandler } from "./useLinkResourceLoadHandler.ts";
+import { useLinkDataLoadHandler } from "./useLinkDataLoadHandler.ts";
+import { useLinkEntryPointLoadHandler } from "./useLinkEntryPointLoadHandler.ts";
 
 type Props = LinkProps;
 
@@ -41,14 +41,14 @@ export default function Link({
       fetchResources(props.to);
       onMouseEnter?.(e);
     },
-    [onMouseEnter, fetchResources, props.to]
+    [onMouseEnter, fetchResources, props.to],
   );
   const handleFocus = useCallback(
     (e: FocusEvent<HTMLAnchorElement>) => {
       fetchResources(props.to);
       onFocus?.(e);
     },
-    [onFocus, fetchResources, props.to]
+    [onFocus, fetchResources, props.to],
   );
   const handleMouseDown = useCallback(
     (e: MouseEvent<HTMLAnchorElement>) => {
@@ -56,7 +56,7 @@ export default function Link({
       fetchData();
       onMouseDown?.(e);
     },
-    [onMouseDown, fetchResources, fetchData, props.to]
+    [onMouseDown, fetchResources, fetchData, props.to],
   );
 
   return (

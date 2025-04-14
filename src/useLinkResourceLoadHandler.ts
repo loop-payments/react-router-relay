@@ -9,8 +9,8 @@ import {
   UNSAFE_DataRouterContext,
   matchRoutes,
 } from "react-router-dom";
-import { InternalPreload } from "./routes/internal-preload-symbol";
-import type { PreloadableComponent } from "./routes/EntryPointRoute";
+import { InternalPreload } from "./routes/internal-preload-symbol.ts";
+import type { PreloadableComponent } from "./routes/EntryPointRoute.ts";
 
 /**
  * Returns a handler for triggering resource loading for a target. This is used
@@ -21,7 +21,7 @@ export function useLinkResourceLoadHandler(): (to: To) => void;
 /** @deprecated move the `to` argument to the callback */
 export function useLinkResourceLoadHandler(to: To): () => void;
 export function useLinkResourceLoadHandler(
-  deprecatedTo?: To
+  deprecatedTo?: To,
 ): (to?: To) => void {
   const routes = useContext(UNSAFE_DataRouterContext)?.router.routes ?? [];
 
@@ -64,9 +64,9 @@ export function useLinkResourceLoadHandler(
                     `[react-router-relay] failed to preload ${
                       match.pathname
                     } resource for route ${JSON.stringify(to)}`,
-                    e
+                    e,
                   );
-                }
+                },
               );
             }
           } catch (e: unknown) {
@@ -74,13 +74,13 @@ export function useLinkResourceLoadHandler(
               `[react-router-relay] failed to call resource preloader ${
                 match.pathname
               } for route ${JSON.stringify(to)}`,
-              e
+              e,
             );
           }
         }
       }
     },
-    [routes, deprecatedTo]
+    [routes, deprecatedTo],
   );
 
   return fetchResources;
