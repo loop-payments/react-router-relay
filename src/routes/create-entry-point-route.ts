@@ -7,7 +7,11 @@ import type {
 } from "react-relay";
 import Relay from "react-relay";
 import type { PreloadableConcreteRequest } from "relay-runtime";
-import type { LoaderFunction, LoaderFunctionArgs } from "react-router-dom";
+import type {
+  LoaderFunction,
+  LoaderFunctionArgs,
+  ShouldRevalidateFunction,
+} from "react-router-dom";
 import type { ComponentType } from "react";
 
 import type {
@@ -24,6 +28,7 @@ type EntryPointRouteProperties = {
   loader: LoaderFunction;
   Component: ComponentType<Record<string, never>>;
   handle?: unknown;
+  shouldRevalidate?: ShouldRevalidateFunction;
 };
 
 export function createEntryPointRoute<
@@ -84,8 +89,11 @@ export function createEntryPointRoute<
     };
   }
 
-  // Entrypoints that are JSResourceReferences cannot have a handle.
+  // Entrypoints that are JSResourceReferences cannot have a handle or
+  // shouldRevalidate.
   const handle = "load" in entryPoint ? undefined : entryPoint.handle;
+  const shouldRevalidate =
+    "load" in entryPoint ? undefined : entryPoint.shouldRevalidate;
 
   return {
     loader,
@@ -93,5 +101,6 @@ export function createEntryPointRoute<
     // Only add the handle if it's defined. This makes spreading the object
     // easier.
     ...(handle !== undefined ? { handle } : {}),
+    ...(shouldRevalidate !== undefined ? { shouldRevalidate } : {}),
   };
 }

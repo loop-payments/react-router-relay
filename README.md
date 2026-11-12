@@ -62,6 +62,25 @@ const entryPoint: SimpleEntryPoint<typeof MyPage> = {
 export default entryPoint;
 ```
 
+#### Route options
+
+Entrypoints may also define a `handle` and a `shouldRevalidate` function. These are propagated to the generated route so you can use react-router's `useMatches` and [`shouldRevalidate`](https://reactrouter.com/start/data/route-object#shouldrevalidate) with entrypoints. They are only propagated when the entrypoint is referenced directly, not through a `JSResource`.
+
+```ts
+const entryPoint: SimpleEntryPoint<typeof MyPage> = {
+  root: JSResource("MyPage", () => import("./MyPage")),
+  getPreloadProps({ params }) {
+    // ...
+  },
+  shouldRevalidate({ currentParams, nextParams, defaultShouldRevalidate }) {
+    // Only reload data when the id changes.
+    return currentParams.someId !== nextParams.someId
+      ? defaultShouldRevalidate
+      : false;
+  },
+};
+```
+
 #### Note for Relay < 16.2
 
 If you're using relay prior to 16.2.0 you won't be able to use the `@preloadable` annotation and thus won't be able to generate `$parameters` files. You can still use entry points, but they'll need to import concrete request objects from the `.graphql` files instead.
