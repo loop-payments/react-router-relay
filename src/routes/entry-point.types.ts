@@ -3,7 +3,11 @@ import type {
   EntryPointComponent,
   EntryPointProps,
 } from "react-relay";
-import type { LoaderFunctionArgs, Params } from "react-router-dom";
+import type {
+  LoaderFunctionArgs,
+  Params,
+  ShouldRevalidateFunction,
+} from "react-router-dom";
 import type { OperationType } from "relay-runtime";
 
 export type BaseEntryPointComponent = EntryPointComponent<
@@ -24,6 +28,9 @@ export interface SimpleEntryPoint<
   // If you define a handle on your entrypoint we will propagate it to the
   // corresponding route.
   handle?: unknown;
+  // If you define shouldRevalidate on your entrypoint we will propagate it to
+  // the corresponding route.
+  shouldRevalidate?: ShouldRevalidateFunction;
 }
 
 export type SimpleEntryPointProps<

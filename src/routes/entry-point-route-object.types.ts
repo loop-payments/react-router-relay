@@ -3,6 +3,7 @@ import type {
   IndexRouteObject,
   NonIndexRouteObject,
   RouteObject,
+  ShouldRevalidateFunction,
 } from "react-router-dom";
 import type { EntryPointParams } from "./entry-point.types.ts";
 
@@ -11,6 +12,9 @@ type BadEntryPointType = {
   readonly getPreloadProps: (entryPointParams: EntryPointParams<any>) => any;
   // Handle will be propagated to the route if the entrypoint is referenced directly.
   readonly handle?: unknown;
+  // shouldRevalidate will be propagated to the route if the entrypoint is
+  // referenced directly.
+  readonly shouldRevalidate?: ShouldRevalidateFunction;
 };
 
 export interface EntryPointIndexRouteObject
